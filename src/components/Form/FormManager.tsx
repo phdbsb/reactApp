@@ -1,11 +1,17 @@
-import React, { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { ExamCard } from "../../models/ExamCard";
-import { useForm } from "react-hook-form";
+import { useForm, Controller  } from "react-hook-form";
+import dayjs, { Dayjs } from "dayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import "./style.css";
+
 
 interface FormData {
     title: string;
     faculty: string;
-    time: string;
+    time: Dayjs | null;
 }
 
 interface FormManagerProps {
@@ -15,14 +21,15 @@ interface FormManagerProps {
 }
 
 const FormManager = ({isEditMode, examToEdit, onSave}: FormManagerProps) => {
-    const { register, handleSubmit, formState: {errors}, reset } = useForm<FormData>();
+    const { register, handleSubmit, formState: { errors }, reset, control } = useForm<FormData>();
 
     const onSubmit = (data: FormData) => {
+
         const newExam = new ExamCard (
             examToEdit ? examToEdit.id : Date.now(),
             data.title,
             data.faculty,
-            data.time
+            dayjs(data.time).toISOString()
         );
         onSave(newExam);
         reset();
@@ -33,10 +40,10 @@ const FormManager = ({isEditMode, examToEdit, onSave}: FormManagerProps) => {
           reset({
             title: examToEdit.title,
             faculty: examToEdit.faculty,
-            time: examToEdit.startsIn
+            time: dayjs(examToEdit.startsIn),
           });
         } else {
-          reset({ title: "", faculty: "", time: "" });
+            reset({ title: "", faculty: "", time: dayjs() });
         }
     }, [isEditMode, examToEdit, reset]);
 
@@ -56,11 +63,23 @@ const FormManager = ({isEditMode, examToEdit, onSave}: FormManagerProps) => {
                 />
                 {errors.faculty && <span>{errors.faculty.message}</span>}
             </div>
+            
             <div>
-                <label>Time:</label>
-                <input
-                    {...register("time", { required: "This field is required" })}
-                />
+                <label>Date and Time:</label>
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                    <Controller
+                        name="time"
+                        control={control}
+                        rules={{ required: "This field is required" }}
+                        render={({ field }) => (
+                            <DateTimePicker
+                                {...field}
+                                value={field.value || null}
+                                onChange={(newValue) => field.onChange(newValue)}
+                            />
+                        )}
+                    />
+                </LocalizationProvider>
                 {errors.time && <span>{errors.time.message}</span>}
             </div>
             <button type="submit">{isEditMode ? "Save Changes" : "Create Exam"}</button>

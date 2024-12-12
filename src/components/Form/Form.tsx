@@ -1,4 +1,3 @@
-import React from "react";
 import FormManager from "./FormManager";
 import { ExamCard } from "../../models/ExamCard";
 import './style.css';

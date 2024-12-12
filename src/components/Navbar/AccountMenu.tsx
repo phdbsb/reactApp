@@ -1,13 +1,5 @@
-import React, { useState } from "react";
 
-interface AccountMenuProps {
-    //isLoggedIn: boolean;
-    onLogout: () => void;
-}
-
-const AccountMenu = ({ onLogout }: AccountMenuProps) => {
-
-    //const [isMenuOpen, setIsMenuOpen] = useState(false);
+const AccountMenu = () => {
 
     return (
         <div className="account-menu">
