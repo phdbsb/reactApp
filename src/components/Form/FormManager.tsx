@@ -63,7 +63,6 @@ const FormManager = ({isEditMode, examToEdit, onSave}: FormManagerProps) => {
                 />
                 {errors.faculty && <span>{errors.faculty.message}</span>}
             </div>
-            
             <div>
                 <label>Date and Time:</label>
                 <LocalizationProvider dateAdapter={AdapterDayjs}>

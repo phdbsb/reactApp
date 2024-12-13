@@ -22,7 +22,7 @@ const Navbar = () => {
                 <span className="contact">Contact</span>
                 <span className="account-name">Petar</span>
                 <img src="/images/user.png" onClick={toggleMenu} alt="Account icon" className="main_account_icon"/>
-                {menuOpen && <AccountMenu onLogout={handleLogout} />}
+                {menuOpen && <AccountMenu />}
             </div>
         </nav>
     );
