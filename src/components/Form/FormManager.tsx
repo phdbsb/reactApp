@@ -49,21 +49,21 @@ const FormManager = ({isEditMode, examToEdit, onSave}: FormManagerProps) => {
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
-            <div className="input1">
+            <div>
                 <label>Title:</label>
                 <input
                     {...register("title", { required: "This field is required" })}
                 />
                 {errors.title && <span>{errors.title.message}</span>}
             </div>
-            <div className="input2">
+            <div>
                 <label>Faculty:</label>
                 <input
                     {...register("faculty", { required: "This field is required" })}
                 />
                 {errors.faculty && <span>{errors.faculty.message}</span>}
             </div>
-            <div className="input3">
+            <div>
                 <label>Date and Time:</label>
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                     <Controller
