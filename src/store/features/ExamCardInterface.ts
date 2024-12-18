@@ -1,4 +1,4 @@
-export interface ExamCardInterface {
+export interface IExamCard {
     id: number;
     title: string;
     faculty: string;

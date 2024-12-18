@@ -1,10 +1,10 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { ExamCard } from "../models/ExamCard";
-import { ExamCardInterface } from "../models/ExamCardInterface";
+import { ExamCard } from "../../models/ExamCard";
+import { IExamCard } from "./ExamCardInterface";
 
 
 interface ExamsState {
-    exams: ExamCardInterface[];
+    exams: IExamCard[];
 }
 
 const initialState: ExamsState = {

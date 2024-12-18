@@ -1,8 +1,8 @@
 import { useState } from "react";
 import Exam from "./Exam";
 import { Form } from "../Form";
-import { addExam, updateExam } from "../../features/examsSlice";
-import { RootState } from '../../app/store';
+import { addExam, updateExam } from "../../store/features/examsSlice";
+import { RootState } from '../../store';
 import { ExamCard } from "../../models/ExamCard";
 import { parseISO, formatDistanceToNow } from 'date-fns';
 import "./style.css";
