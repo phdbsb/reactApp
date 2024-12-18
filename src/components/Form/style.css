@@ -21,7 +21,7 @@ form {
   gap: 15px;
 }
 
-form div {
+.input1, .input2, .input3 {
   display: flex;
   flex-direction: column;
 }
