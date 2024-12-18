@@ -1,20 +1,17 @@
 import { useState } from "react";
 import Exam from "./Exam";
 import { Form } from "../Form";
+import { addExam, updateExam } from "../../store/features/examsSlice";
+import { RootState } from '../../store';
 import { ExamCard } from "../../models/ExamCard";
 import { parseISO, formatDistanceToNow } from 'date-fns';
 import "./style.css";
+import { useDispatch, useSelector } from "react-redux";
 
-const examData: ExamCard[] = [
-    new ExamCard(1, "Operating systems", "Faculty of Electronics", '2024-12-10T09:00:00'),
-    new ExamCard(2, "Computer Network", "Faculty of Electronics", '2024-12-11T14:00:00'),
-    new ExamCard(3, "Web programming", "Faculty of Electronics", '2024-12-15T08:00:00'),
-    new ExamCard(4, "Software engineering", "Faculty of Electronics", '2024-12-18T12:00:00'),
-    new ExamCard(5, "Database systems", "Faculty of Electronics", '2024-12-20T10:00:00')
-];
 
 const Exams = () => {
-    const [exams, setExams] = useState<ExamCard[]>(examData);
+    const exams = useSelector((state: RootState) => state.exams.exams);
+    const dispatch = useDispatch();
 
     const [formState, setFormState] = useState ({
         isEditMode: false,
@@ -39,10 +36,19 @@ const Exams = () => {
     };
 
     const handleSave = (exam: ExamCard) => {
-        setExams((prevExams) =>
-            formState.isEditMode && formState.examToEditId !== null ? 
-                prevExams.map((e) => (e.id === formState.examToEditId ? { ...exam } : e)) : [...prevExams, exam]
-        );
+        const examObject = {
+            id: exam.id,
+            title: exam.title,
+            faculty: exam.faculty,
+            startsIn: exam.startsIn,
+        };
+
+        if (formState.isEditMode && formState.examToEditId !== null) {
+            dispatch(updateExam(examObject));
+        } else {
+            dispatch(addExam(examObject));
+        }
+        
         setFormState({
             isEditMode: false,
             examToEditId: null,

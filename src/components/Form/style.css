@@ -21,7 +21,7 @@ form {
   gap: 15px;
 }
 
-form div {
+form > div {
   display: flex;
   flex-direction: column;
 }
