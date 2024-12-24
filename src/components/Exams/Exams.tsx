@@ -1,23 +1,30 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Exam from "./Exam";
 import { Form } from "../Form";
-import { addExam, updateExam } from "../../store/features/examsSlice";
-import { RootState } from '../../store';
+import { fetchExams } from "../../store/thunks/examsThunks";
+import { RootState, AppDispatch } from '../../store';
 import { ExamCard } from "../../models/ExamCard";
 import { parseISO, formatDistanceToNow } from 'date-fns';
 import "./style.css";
 import { useDispatch, useSelector } from "react-redux";
+import useSaveExam from "../../hooks/useSaveExam";
 
 
 const Exams = () => {
     const exams = useSelector((state: RootState) => state.exams.exams);
-    const dispatch = useDispatch();
+    const dispatch = useDispatch<AppDispatch>();
 
     const [formState, setFormState] = useState ({
         isEditMode: false,
         examToEditId: null as number | null,
         showForm: false
     });
+
+    const { saveExam } = useSaveExam();
+
+    useEffect(() => {
+        dispatch(fetchExams());
+    }, [dispatch]);
 
     const onExamDoubleClick = (exam: ExamCard) => {
         setFormState({
@@ -35,19 +42,8 @@ const Exams = () => {
         });
     };
 
-    const handleSave = (exam: ExamCard) => {
-        const examObject = {
-            id: exam.id,
-            title: exam.title,
-            faculty: exam.faculty,
-            startsIn: exam.startsIn,
-        };
-
-        if (formState.isEditMode && formState.examToEditId !== null) {
-            dispatch(updateExam(examObject));
-        } else {
-            dispatch(addExam(examObject));
-        }
+    const handleSave = async (exam: ExamCard) => {
+        await saveExam(exam, formState);
         
         setFormState({
             isEditMode: false,
@@ -60,6 +56,9 @@ const Exams = () => {
 
     const calculateTimeLeft = (exam: ExamCard) => {
         const examDate = parseISO(exam.startsIn);
+        if (isNaN(examDate.getTime())) {
+            return "Invalid date";
+        }
         return formatDistanceToNow(examDate, { addSuffix: true });
     };
     
