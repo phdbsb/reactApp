@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import Exam from "./Exam";
 import { Form } from "../Form";
-import { addExam, fetchExams, updateExam } from "../../store/thunks/examsThunks";
+import { fetchExams } from "../../store/thunks/examsThunks";
 import { RootState, AppDispatch } from '../../store';
 import { ExamCard } from "../../models/ExamCard";
 import { parseISO, formatDistanceToNow } from 'date-fns';
 import "./style.css";
 import { useDispatch, useSelector } from "react-redux";
+import useSaveExam from "../../hooks/useSaveExam";
 
 
 const Exams = () => {
@@ -18,6 +19,8 @@ const Exams = () => {
         examToEditId: null as number | null,
         showForm: false
     });
+
+    const { saveExam } = useSaveExam();
 
     useEffect(() => {
         dispatch(fetchExams());
@@ -40,18 +43,7 @@ const Exams = () => {
     };
 
     const handleSave = async (exam: ExamCard) => {
-        const examObject = {
-            id: exam.id,
-            title: exam.title,
-            faculty: exam.faculty,
-            startsIn: exam.startsIn,
-        };
-
-        if (formState.isEditMode && formState.examToEditId !== null) {
-            await dispatch(updateExam(examObject)); 
-        } else {
-            await dispatch(addExam(examObject));
-        }
+        await saveExam(exam, formState);
         
         setFormState({
             isEditMode: false,
