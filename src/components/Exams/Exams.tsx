@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Exam from "./Exam";
 import { Form } from "../Form";
-import { addExam, updateExam } from "../../store/features/examsSlice";
-import { RootState } from '../../store';
+import { addExam, fetchExams, updateExam } from "../../store/thunks/examsThunks";
+import { RootState, AppDispatch } from '../../store';
 import { ExamCard } from "../../models/ExamCard";
 import { parseISO, formatDistanceToNow } from 'date-fns';
 import "./style.css";
@@ -11,13 +11,17 @@ import { useDispatch, useSelector } from "react-redux";
 
 const Exams = () => {
     const exams = useSelector((state: RootState) => state.exams.exams);
-    const dispatch = useDispatch();
+    const dispatch = useDispatch<AppDispatch>();
 
     const [formState, setFormState] = useState ({
         isEditMode: false,
         examToEditId: null as number | null,
         showForm: false
     });
+
+    useEffect(() => {
+        dispatch(fetchExams());
+    }, [dispatch]);
 
     const onExamDoubleClick = (exam: ExamCard) => {
         setFormState({
@@ -35,7 +39,7 @@ const Exams = () => {
         });
     };
 
-    const handleSave = (exam: ExamCard) => {
+    const handleSave = async (exam: ExamCard) => {
         const examObject = {
             id: exam.id,
             title: exam.title,
@@ -44,9 +48,9 @@ const Exams = () => {
         };
 
         if (formState.isEditMode && formState.examToEditId !== null) {
-            dispatch(updateExam(examObject));
+            await dispatch(updateExam(examObject)); 
         } else {
-            dispatch(addExam(examObject));
+            await dispatch(addExam(examObject));
         }
         
         setFormState({
@@ -60,6 +64,9 @@ const Exams = () => {
 
     const calculateTimeLeft = (exam: ExamCard) => {
         const examDate = parseISO(exam.startsIn);
+        if (isNaN(examDate.getTime())) {
+            return "Invalid date";
+        }
         return formatDistanceToNow(examDate, { addSuffix: true });
     };
     
