@@ -1,6 +1,8 @@
 export interface IExamCard {
-    id: number;
+    id: string;
     title: string;
     faculty: string;
-    startsIn: string;
+    semester: number;
+    schedule: { [key: string]: string };
+    isPassed: boolean;
 }

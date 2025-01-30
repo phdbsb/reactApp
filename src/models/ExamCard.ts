@@ -1,13 +1,17 @@
 export class ExamCard {
-    id: number;
+    id: string;
     title: string;
     faculty: string;
-    startsIn: string;
+    semester: number;
+    schedule: { [key: string]: string };
+    isPassed: boolean;
 
-    constructor(id: number, title: string, faculty: string, startsIn: string) {
+    constructor(id: string, title: string, faculty: string, semester: number, schedule: { [key: string]: string }, isPassed: boolean ) {
         this.id = id;
         this.title = title;
         this.faculty = faculty;
-        this.startsIn = startsIn;
+        this.semester = semester;
+        this.schedule = schedule;
+        this.isPassed = isPassed;
     }
 };

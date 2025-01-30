@@ -1,23 +1,46 @@
 import { ExamCard } from '../../models/ExamCard';
-import './style.css'
+import { getCurrentSemester } from '../../utils/getCurrentSemester';
+import './style.css';
 
 interface ExamCardProps {
     exam: ExamCard;
-    timeLeft: string;
+    timeLeft: string | null;
     onDoubleClick: (exam: ExamCard) => void;
+    onReportClick: (exam: ExamCard) => void;
+    onPassClick: (exam: ExamCard) => void;
 };
 
-const Exam = ({ exam, onDoubleClick, timeLeft  }: ExamCardProps) => {
+const Exam = ({ exam, onDoubleClick, onReportClick, timeLeft, onPassClick  }: ExamCardProps) => {
+
+    const currentSemester = getCurrentSemester();
+    const canReport = currentSemester === 2 || (currentSemester === 1 && exam.semester === 1);
 
     return (
-        <div className="exam-card" onDoubleClick={() => onDoubleClick(exam)} title="Double-click to edit">
+        <div className={`exam-card ${exam.isPassed ? 'passed' : ''}`}  onDoubleClick={() => onDoubleClick(exam)} title="Double-click to edit">
             <div className="exam-header">
                 <h3 className="exam-title">{exam.title}</h3>
-                <button className="apply-button">Report exam</button>
+                <button 
+                    className="apply-button" 
+                    disabled={!canReport || exam.isPassed} 
+                    onClick={() => { onReportClick(exam) }}
+                >
+                    Report exam
+                </button>
             </div>
             <div className="exam-footer">
                 <span className="exam-faculty">{exam.faculty}</span>
-                <span className="exam-time"> {timeLeft} </span>
+                <span className="exam-time">
+                    {timeLeft ? `${timeLeft}` : ""}
+                </span>
+                {exam.isPassed ? (
+                    <button className="pass-button" onClick={() => onPassClick(exam)}>
+                        Nije polozio
+                    </button>
+                ) : (
+                    <button className="pass-button" onClick={() => onPassClick(exam)}>
+                        Polozio
+                    </button>
+                )}
             </div>
         </div>
     );

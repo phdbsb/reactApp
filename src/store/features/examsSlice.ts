@@ -26,10 +26,10 @@ const examsSlice = createSlice({
             .addCase(updateExam.fulfilled, (state, action: PayloadAction<IExamCard>) => {
                 const index = state.exams.findIndex((exam) => exam.id === action.payload.id);
                 if (index !== -1) {
-                state.exams[index] = action.payload;
+                    state.exams[index] = action.payload;    
                 }
             })
-            .addCase(removeExam.fulfilled, (state, action: PayloadAction<number>) => {
+            .addCase(removeExam.fulfilled, (state, action: PayloadAction<string>) => {
             state.exams = state.exams.filter((exam) => exam.id !== action.payload);
       });
     }

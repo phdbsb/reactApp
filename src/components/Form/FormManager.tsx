@@ -5,13 +5,17 @@ import dayjs, { Dayjs } from "dayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { v4 as uuidv4 } from 'uuid';
 import "./style.css";
 
 
 interface FormData {
     title: string;
     faculty: string;
-    time: Dayjs | null;
+    semester: number;
+    januaryDate: Dayjs | null;
+    marchDate: Dayjs | null;
+    augustDate: Dayjs | null;
 }
 
 interface FormManagerProps {
@@ -23,27 +27,40 @@ interface FormManagerProps {
 const FormManager = ({isEditMode, examToEdit, onSave}: FormManagerProps) => {
     const { register, handleSubmit, formState: { errors }, reset, control } = useForm<FormData>();
 
-    const onSubmit = (data: FormData) => {
 
+    const onSubmit = (data: FormData) => {
+        console.log("Form Data:", data);
+        console.log("ExamTOEdit type: ", typeof(examToEdit?.id));
         const newExam = new ExamCard (
-            examToEdit ? examToEdit.id : Date.now(),
+            examToEdit ? examToEdit.id : uuidv4(),
             data.title,
             data.faculty,
-            dayjs(data.time).toISOString()
+            Number(data.semester),
+            {
+                January: data.januaryDate?.toISOString() || "",
+                March: data.marchDate?.toISOString() || "",
+                August: data.augustDate?.toISOString() || "",
+            },
+            examToEdit ? examToEdit.isPassed : false
         );
+        console.log("New Exam:", newExam);
         onSave(newExam);
         reset();
     };
 
     useEffect(() => {
         if (isEditMode && examToEdit) {
-          reset({
-            title: examToEdit.title,
-            faculty: examToEdit.faculty,
-            time: dayjs(examToEdit.startsIn),
-          });
+            const { schedule } = examToEdit;
+            reset({
+                title: examToEdit.title,
+                faculty: examToEdit.faculty,
+                semester: examToEdit.semester,
+                januaryDate: schedule.January ? dayjs(schedule.January) : null,
+                marchDate: schedule.March ? dayjs(schedule.March) : null,
+                augustDate: schedule.August ? dayjs(schedule.August) : null,
+            });
         } else {
-            reset({ title: "", faculty: "", time: dayjs() });
+            reset({ title: "", faculty: "", semester: 1, januaryDate: dayjs(), marchDate: dayjs(), augustDate: dayjs(), });
         }
     }, [isEditMode, examToEdit, reset]);
 
@@ -64,10 +81,18 @@ const FormManager = ({isEditMode, examToEdit, onSave}: FormManagerProps) => {
                 {errors.faculty && <span>{errors.faculty.message}</span>}
             </div>
             <div>
-                <label>Date and Time:</label>
+                <label>Semester:</label>
+                <select {...register("semester", { required: "This field is required" })}>
+                    <option value={1}>Semester 1</option>
+                    <option value={2}>Semester 2</option>
+                </select>
+                {errors.semester && <span>{errors.semester.message}</span>}
+            </div>
+            <div>
+                <label>January Deadline:</label>
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                     <Controller
-                        name="time"
+                        name="januaryDate"
                         control={control}
                         rules={{ required: "This field is required" }}
                         render={({ field }) => (
@@ -79,7 +104,43 @@ const FormManager = ({isEditMode, examToEdit, onSave}: FormManagerProps) => {
                         )}
                     />
                 </LocalizationProvider>
-                {errors.time && <span>{errors.time.message}</span>}
+                {errors.januaryDate && <span>{errors.januaryDate.message}</span>}
+            </div>
+            <div>
+                <label>March Deadline:</label>
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                    <Controller
+                        name="marchDate"
+                        control={control}
+                        rules={{ required: "This field is required" }}
+                        render={({ field }) => (
+                            <DateTimePicker
+                                {...field}
+                                value={field.value || null}
+                                onChange={(newValue) => field.onChange(newValue)}
+                            />
+                        )}
+                    />
+                </LocalizationProvider>
+                {errors.marchDate && <span>{errors.marchDate.message}</span>}
+            </div>
+            <div>
+                <label>August Deadline:</label>
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                    <Controller
+                        name="augustDate"
+                        control={control}
+                        rules={{ required: "This field is required" }}
+                        render={({ field }) => (
+                            <DateTimePicker
+                                {...field}
+                                value={field.value || null}
+                                onChange={(newValue) => field.onChange(newValue)}
+                            />
+                        )}
+                    />
+                </LocalizationProvider>
+                {errors.augustDate && <span>{errors.augustDate.message}</span>}
             </div>
             <button type="submit">{isEditMode ? "Save Changes" : "Create Exam"}</button>
         </form>

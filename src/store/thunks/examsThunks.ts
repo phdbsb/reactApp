@@ -17,6 +17,7 @@ export const addExam = createAsyncThunk("exams/addExam", async (exam: ExamCard) 
       body: JSON.stringify(exam)
     });
     const data = await response.json();
+    console.log("Newly created exam:", data);
     return data;
 });
 
@@ -28,11 +29,14 @@ export const updateExam = createAsyncThunk("exams/updateExam", async (exam: Exam
     },
     body: JSON.stringify(exam)
     });
+    if (!response.ok) {
+      throw new Error(`Failed to update exam with id: ${exam.id}`);
+    }
     const data = await response.json();
     return data;
 });
   
-export const removeExam = createAsyncThunk("exams/removeExam", async (id: number) => {
+export const removeExam = createAsyncThunk("exams/removeExam", async (id: string) => {
     await fetch(`http://localhost:5000/exams/${id}`, {
       method: "DELETE"
     });

@@ -4,31 +4,92 @@
       "id": "1",
       "title": "Operating systems",
       "faculty": "Faculty of Electronics",
-      "startsIn": "2024-12-10T08:00:00.000Z"
+      "semester": 1,
+      "schedule": {
+        "January": "2025-01-08T23:00:00.000Z",
+        "March": "2025-01-30T11:55:00.000Z",
+        "August": "2025-08-12T23:00:00.000Z"
+      },
+      "isPassed": false
     },
     {
       "id": "2",
-      "title": "Computer Network",
+      "title": "Computer network",
       "faculty": "Faculty of Electronics",
-      "startsIn": "2024-12-11T14:00:00"
+      "semester": 1,
+      "schedule": {
+        "January": "2025-01-09T23:00:00.000Z",
+        "March": "2025-03-10T23:00:00.000Z",
+        "August": "2025-08-12T23:00:00.000Z"
+      },
+      "isPassed": false
     },
     {
       "id": "3",
       "title": "Web programming",
       "faculty": "Faculty of Electronics",
-      "startsIn": "2024-12-15T08:00:00"
+      "semester": 2,
+      "schedule": {
+        "January": "2025-01-07T23:00:00.000Z",
+        "March": "2025-03-09T23:00:00.000Z",
+        "August": "2025-08-11T23:00:00.000Z"
+      },
+      "isPassed": false
     },
     {
       "id": "4",
       "title": "Software engineering",
       "faculty": "Faculty of Electronics",
-      "startsIn": "2024-12-18T12:00:00"
+      "semester": 2,
+      "schedule": {
+        "January": "2025-01-03T23:00:00.000Z",
+        "March": "2025-03-05T23:00:00.000Z",
+        "August": "2025-08-13T23:00:00.000Z"
+      },
+      "isPassed": false
     },
     {
       "id": "5",
-      "title": "Database systems",
+      "title": "Database system",
       "faculty": "Faculty of Electronics",
-      "startsIn": "2024-12-20T09:00:00.000Z"
+      "semester": 2,
+      "schedule": {
+        "January": "2025-01-02T23:00:00.000Z",
+        "March": "2025-03-08T23:00:00.000Z",
+        "August": "2025-08-11T23:00:00.000Z"
+      },
+      "isPassed": false
+    },
+    {
+      "id": "1737546002696",
+      "title": "Algorithm analysis",
+      "faculty": "Faculty of Electronics",
+      "semester": 2,
+      "schedule": {
+        "January": "2025-01-16T11:38:08.955Z",
+        "March": "2025-03-12T11:38:08.955Z",
+        "August": "2025-08-11T10:38:08.955Z"
+      }
+    }
+  ],
+  "deadlines": [
+    {
+      "name": "Januarski",
+      "dateFrom": "2025-01-01T00:00:00.000Z",
+      "dateTo": "2025-01-15T23:59:59.999Z",
+      "id": "5e20"
+    },
+    {
+      "name": "Martovski",
+      "dateFrom": "2025-03-01T00:00:00.000Z",
+      "dateTo": "2025-03-15T23:59:59.999Z",
+      "id": "c460"
+    },
+    {
+      "name": "Avgustovski",
+      "dateFrom": "2025-08-01T00:00:00.000Z",
+      "dateTo": "2025-08-15T23:59:59.999Z",
+      "id": "6d68"
     }
   ]
 }

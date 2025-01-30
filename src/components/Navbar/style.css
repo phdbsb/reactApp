@@ -1,4 +1,5 @@
 .navbar-container {
+    font-family: Arial;
     display: flex;
     justify-content: space-between;
     align-items: center;

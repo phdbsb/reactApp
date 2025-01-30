@@ -8,6 +8,7 @@ import { parseISO, formatDistanceToNow } from 'date-fns';
 import "./style.css";
 import { useDispatch, useSelector } from "react-redux";
 import useSaveExam from "../../hooks/useSaveExam";
+import Popup from "../Popup/Popup";
 
 
 const Exams = () => {
@@ -16,9 +17,12 @@ const Exams = () => {
 
     const [formState, setFormState] = useState ({
         isEditMode: false,
-        examToEditId: null as number | null,
+        examToEditId: null as string | null,
         showForm: false
     });
+
+    const [selectedExam, setSelectedExam] = useState<ExamCard | null>(null);
+    const [selectedTerms, setSelectedTerms] = useState<Record<string, string>>({});
 
     const { saveExam } = useSaveExam();
 
@@ -34,6 +38,15 @@ const Exams = () => {
         });
     };
 
+    const onReportClick = (exam: ExamCard) => {
+        setSelectedExam(exam);
+    }
+
+    const onPassClick = (exam: ExamCard) => {
+        const updatedExam = { ...exam, isPassed: !exam.isPassed };
+        //dispatch(saveExam(updatedExam, formState));
+    };
+
     const onCreateClick = () => {
         setFormState({
             isEditMode: false,
@@ -41,7 +54,7 @@ const Exams = () => {
             showForm: true,
         });
     };
-
+    
     const handleSave = async (exam: ExamCard) => {
         await saveExam(exam, formState);
         
@@ -52,21 +65,36 @@ const Exams = () => {
         });
     };
 
+    const handlePopupSave = (term: string) => {
+        if (selectedExam) {
+            setSelectedTerms((prev) => ({
+                ...prev,
+                [selectedExam.id]: term,
+            }));
+            setSelectedExam(null);
+        }
+    };
+
     const examToEdit = formState.examToEditId ? exams.find((exam) => exam.id === formState.examToEditId) : undefined;
 
     const calculateTimeLeft = (exam: ExamCard) => {
-        const examDate = parseISO(exam.startsIn);
+        const selectedTerm = selectedTerms[exam.id];
+        if (!selectedTerm) {
+            return null;
+        }
+        const examDate = parseISO(exam.schedule[selectedTerm]);
         if (isNaN(examDate.getTime())) {
             return "Invalid date";
         }
         return formatDistanceToNow(examDate, { addSuffix: true });
     };
-    
+
+
     return (
         <>
             <div className="exams-container">
-                {exams.map((exam) => (
-                    <Exam key={exam.id} exam={exam} onDoubleClick={onExamDoubleClick} timeLeft={calculateTimeLeft(exam)}/>
+                {exams.map((exam, index) => (
+                    <Exam key={`${exam.id}-${index}`} exam={exam} onDoubleClick={onExamDoubleClick} onReportClick={onReportClick} onPassClick={onPassClick} timeLeft={calculateTimeLeft(exam)}/>
                 ))}
             </div>
             <div className="create-button-container">
@@ -80,6 +108,13 @@ const Exams = () => {
                         onSave={handleSave}
                     />
                 </div>
+            )}
+            {selectedExam && (
+                <Popup 
+                    exam={selectedExam}
+                    onSave={handlePopupSave}
+                    onClose={() => setSelectedExam(null)}
+                />
             )}
         </>
     );
