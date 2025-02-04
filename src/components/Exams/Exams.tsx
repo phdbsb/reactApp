@@ -1,14 +1,14 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from "react"; 
 import Exam from "./Exam";
-import { Form } from "../Form";
-import { fetchExams } from "../../store/thunks/examsThunks";
-import { RootState, AppDispatch } from '../../store';
-import { ExamCard } from "../../models/ExamCard";
-import { parseISO, formatDistanceToNow } from 'date-fns';
+import { Form } from "components/Form";
+import { fetchExams, updateExam } from "store/thunks/examsThunks";
+import { RootState, AppDispatch } from "store";
+import { ExamCard } from "models/ExamCard"; 
+import { parseISO, formatDistanceToNow, isPast } from 'date-fns';
 import "./style.css";
 import { useDispatch, useSelector } from "react-redux";
-import useSaveExam from "../../hooks/useSaveExam";
-import Popup from "../Popup/Popup";
+import useSaveExam from "hooks/useSaveExam";
+import Popup from "components/Popup/Popup";
 
 
 const Exams = () => {
@@ -23,12 +23,27 @@ const Exams = () => {
 
     const [selectedExam, setSelectedExam] = useState<ExamCard | null>(null);
     const [selectedTerms, setSelectedTerms] = useState<Record<string, string>>({});
+    const [timeLeftMap, setTimeLeftMap] = useState<Record<string, string>>({});
 
     const { saveExam } = useSaveExam();
 
     useEffect(() => {
         dispatch(fetchExams());
     }, [dispatch]);
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setTimeLeftMap(() => {
+                const newTimeLeftMap: Record<string, string> = {};
+                exams.forEach((exam) => {
+                    newTimeLeftMap[exam.id] = calculateTimeLeft(exam) || "";
+                });
+                return newTimeLeftMap;
+            });
+        });
+
+        return () => clearInterval(interval);
+    }, [exams, selectedTerms]);
 
     const onExamDoubleClick = (exam: ExamCard) => {
         setFormState({
@@ -42,9 +57,9 @@ const Exams = () => {
         setSelectedExam(exam);
     }
 
-    const onPassClick = (exam: ExamCard) => {
+    const onPassClick = async (exam: ExamCard) => {
         const updatedExam = { ...exam, isPassed: !exam.isPassed };
-        //dispatch(saveExam(updatedExam, formState));
+        dispatch(updateExam(updatedExam));
     };
 
     const onCreateClick = () => {
@@ -79,14 +94,12 @@ const Exams = () => {
 
     const calculateTimeLeft = (exam: ExamCard) => {
         const selectedTerm = selectedTerms[exam.id];
-        if (!selectedTerm) {
-            return null;
-        }
+        if (!selectedTerm) return null;
+
         const examDate = parseISO(exam.schedule[selectedTerm]);
-        if (isNaN(examDate.getTime())) {
-            return "Invalid date";
-        }
-        return formatDistanceToNow(examDate, { addSuffix: true });
+        if (isNaN(examDate.getTime())) return "Invalid date";
+
+        return isPast(examDate) ? "Time is up" : formatDistanceToNow(examDate, { addSuffix: true });
     };
 
 
@@ -94,7 +107,7 @@ const Exams = () => {
         <>
             <div className="exams-container">
                 {exams.map((exam, index) => (
-                    <Exam key={`${exam.id}-${index}`} exam={exam} onDoubleClick={onExamDoubleClick} onReportClick={onReportClick} onPassClick={onPassClick} timeLeft={calculateTimeLeft(exam)}/>
+                    <Exam key={`${exam.id}-${index}`} exam={exam} onDoubleClick={onExamDoubleClick} onReportClick={onReportClick} onPassClick={onPassClick} timeLeft={timeLeftMap[exam.id] || ""}/>
                 ))}
             </div>
             <div className="create-button-container">

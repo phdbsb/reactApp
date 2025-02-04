@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ExamCard } from "../../models/ExamCard";
+import { ExamCard } from "models/ExamCard";
 import { format } from "date-fns";
 
 import './style.css';

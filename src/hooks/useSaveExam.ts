@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
-import { ExamCard } from "../models/ExamCard";
-import { addExam, updateExam } from "../store/thunks/examsThunks";
-import { AppDispatch } from "../store";
+import { ExamCard } from "models/ExamCard";
+import { addExam, updateExam } from "store/thunks/examsThunks";
+import { AppDispatch } from "store";
 
 interface FormState {
     isEditMode: boolean;

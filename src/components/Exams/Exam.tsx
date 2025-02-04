@@ -1,5 +1,5 @@
-import { ExamCard } from '../../models/ExamCard';
-import { getCurrentSemester } from '../../utils/getCurrentSemester';
+import { ExamCard } from 'models/ExamCard';
+import { getCurrentSemester } from 'utils/getCurrentSemester';
 import './style.css';
 
 interface ExamCardProps {
@@ -22,24 +22,19 @@ const Exam = ({ exam, onDoubleClick, onReportClick, timeLeft, onPassClick  }: Ex
                 <button 
                     className="apply-button" 
                     disabled={!canReport || exam.isPassed} 
-                    onClick={() => { onReportClick(exam) }}
+                    onClick={() => onReportClick(exam) }
                 >
                     Report exam
                 </button>
             </div>
             <div className="exam-footer">
                 <span className="exam-faculty">{exam.faculty}</span>
-                <span className="exam-time">
-                    {timeLeft ? `${timeLeft}` : ""}
-                </span>
-                {exam.isPassed ? (
-                    <button className="pass-button" onClick={() => onPassClick(exam)}>
-                        Nije polozio
-                    </button>
+                {timeLeft !== "Time is up" ? (
+                    <span className="exam-time">{timeLeft}</span>
                 ) : (
-                    <button className="pass-button" onClick={() => onPassClick(exam)}>
-                        Polozio
-                    </button>
+                    <span className="pass-button" onClick={() => onPassClick(exam)}>
+                        {exam.isPassed ? "Didn't passed" : "Passed"}
+                    </span>
                 )}
             </div>
         </div>

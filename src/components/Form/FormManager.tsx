@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { ExamCard } from "../../models/ExamCard";
+import { useEffect } from "react";
+import { ExamCard } from "models/ExamCard";
 import { useForm, Controller  } from "react-hook-form";
 import dayjs, { Dayjs } from "dayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
@@ -64,6 +64,12 @@ const FormManager = ({isEditMode, examToEdit, onSave}: FormManagerProps) => {
         }
     }, [isEditMode, examToEdit, reset]);
 
+    const deadlines = [
+        { label: "January Deadline:", name: "januaryDate" },
+        { label: "March Deadline:", name: "marchDate" },
+        { label: "August Deadline:", name: "augustDate" }
+    ];
+
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
             <div>
@@ -88,60 +94,26 @@ const FormManager = ({isEditMode, examToEdit, onSave}: FormManagerProps) => {
                 </select>
                 {errors.semester && <span>{errors.semester.message}</span>}
             </div>
-            <div>
-                <label>January Deadline:</label>
-                <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <Controller
-                        name="januaryDate"
-                        control={control}
-                        rules={{ required: "This field is required" }}
-                        render={({ field }) => (
-                            <DateTimePicker
-                                {...field}
-                                value={field.value || null}
-                                onChange={(newValue) => field.onChange(newValue)}
-                            />
-                        )}
-                    />
-                </LocalizationProvider>
-                {errors.januaryDate && <span>{errors.januaryDate.message}</span>}
-            </div>
-            <div>
-                <label>March Deadline:</label>
-                <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <Controller
-                        name="marchDate"
-                        control={control}
-                        rules={{ required: "This field is required" }}
-                        render={({ field }) => (
-                            <DateTimePicker
-                                {...field}
-                                value={field.value || null}
-                                onChange={(newValue) => field.onChange(newValue)}
-                            />
-                        )}
-                    />
-                </LocalizationProvider>
-                {errors.marchDate && <span>{errors.marchDate.message}</span>}
-            </div>
-            <div>
-                <label>August Deadline:</label>
-                <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <Controller
-                        name="augustDate"
-                        control={control}
-                        rules={{ required: "This field is required" }}
-                        render={({ field }) => (
-                            <DateTimePicker
-                                {...field}
-                                value={field.value || null}
-                                onChange={(newValue) => field.onChange(newValue)}
-                            />
-                        )}
-                    />
-                </LocalizationProvider>
-                {errors.augustDate && <span>{errors.augustDate.message}</span>}
-            </div>
+            {deadlines.map(({ label, name }) => (
+                <div key={name}>
+                    <label>{label}</label>
+                    <LocalizationProvider dateAdapter={AdapterDayjs}>
+                        <Controller
+                            name={name as keyof FormData}
+                            control={control}
+                            rules={{ required: "This field is required" }}
+                            render={({ field }) => (
+                                <DateTimePicker
+                                    {...field}
+                                    value={field.value ? dayjs(field.value) : null}
+                                    onChange={(newValue) => field.onChange(newValue)}
+                                />
+                            )}
+                        />
+                    </LocalizationProvider>
+                    {errors[name as keyof FormData] && <span>{errors[name as keyof FormData]?.message}</span>}
+                </div>
+            ))}
             <button type="submit">{isEditMode ? "Save Changes" : "Create Exam"}</button>
         </form>
     );

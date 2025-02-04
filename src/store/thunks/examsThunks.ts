@@ -1,5 +1,5 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
-import { ExamCard } from "../../models/ExamCard";
+import { ExamCard } from "models/ExamCard";
 
 
 export const fetchExams = createAsyncThunk("exams/fetchExams", async () => {

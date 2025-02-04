@@ -9,7 +9,7 @@
 
 .exam-card {
     width: 300px;
-    border: 1px solid #ddd;
+    border: 3px solid transparent;
     border-radius: 8px;
     padding: 16px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -19,6 +19,10 @@
 
 .exam-card.passed {
     border: 3px solid green;
+}
+
+.exam-faculty {
+    padding: 4px 0;
 }
 
 .exam-header {
@@ -32,6 +36,16 @@
     justify-content: space-between;
     font-size: 14px;
     margin-top: 10px;
+    align-items: center;
+}
+
+.pass-button {
+    padding: 4px 8px;
+}
+
+.pass-button:hover {
+    background-color: #e6e8ec;
+    border-radius: 4px;
 }
 
 .exam-title {

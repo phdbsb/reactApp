@@ -1,5 +1,5 @@
 import FormManager from "./FormManager";
-import { ExamCard } from "../../models/ExamCard";
+import { ExamCard } from "models/ExamCard";
 import './style.css';
 
 interface FormProps {
