@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { ExamCard } from "models/ExamCard";
-import { format } from "date-fns";
-
+import TermSelection from "./TermSelection";
 import './style.css';
+import { ExamCard } from "@/api/endpoints/exams/types";
+import { useGetDeadlinesQuery } from "@/api/endpoints/deadlines";
 
 interface PopupProps {
     exam: ExamCard;
@@ -10,23 +10,18 @@ interface PopupProps {
     onSave: (selectedTerm: string) => void;
 }
 
-const Popup = ({exam, onClose, onSave }: PopupProps) => {
-
-    const deadlines = Object.keys(exam.schedule);
-    const [selectedTerm, setSelectedTerm] = useState<string>('');
-    const currentDate = new Date();
-
-    const handleCheckboxChange = (term: string) => {
-        setSelectedTerm(term);
-    };
+const Popup = ({ exam, onClose, onSave }: PopupProps) => {
+    const { data: deadlines } = useGetDeadlinesQuery(exam.id);
+    const [selectedTerm, setSelectedTerm] = useState<string>("");
 
     const handleSave = () => {
-        if (selectedTerm) {
-            onSave(selectedTerm);
-            onClose();
-        } else {
-            alert("Please select a deadline before saving.");
+        if(!selectedTerm) {
+            alert("Select a deadline before saving");
+            return;
         }
+        
+        onSave(selectedTerm);
+        onClose();
     };
 
     return (
@@ -38,34 +33,13 @@ const Popup = ({exam, onClose, onSave }: PopupProps) => {
                         &times;
                     </button>
                 </div>
+                
                 <div className="popup-body">
-                    <div>
-                        <strong>Choose a deadline: </strong>
-                        <div className="term-options">
-                            {deadlines.map((deadline, index) => {
-                                const termDate = new Date(exam.schedule[deadline]);
-                                const isPast = termDate < currentDate;
-                                return (
-                                    <div key={index} className="term-option">
-                                        <label className="term-label">
-                                            <input
-                                                type="checkbox"
-                                                value={deadline}
-                                                checked={selectedTerm === deadline}
-                                                disabled={isPast}
-                                                onChange={() => handleCheckboxChange(deadline)}
-                                            />
-                                            <span
-                                                className={`term-text ${isPast ? "disabled-text" : ""}`}
-                                            >
-                                                {deadline}: {format(termDate, 'dd.MM.yyyy')}
-                                            </span>
-                                        </label>
-                                    </div>
-                                );
-                            })}
-                        </div>
-                    </div>
+                    <TermSelection
+                        deadlines={deadlines || []}
+                        selectedTerm={selectedTerm}
+                        onSelectTerm={setSelectedTerm}
+                    />
                 </div>
 
                 <div className="popup-footer">
@@ -74,6 +48,6 @@ const Popup = ({exam, onClose, onSave }: PopupProps) => {
             </div>
         </div>
     );
-}
+};
 
 export default Popup;

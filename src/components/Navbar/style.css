@@ -1,23 +1,16 @@
 .navbar-container {
-    font-family: Arial;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 10px;
+    justify-content: flex-end;
 }
 .navbar-title {
     font-size: 1.5em;
 }
-.account-container {
-    display: flex;
-    align-items: center;
-    position: relative;
-}
+
 .contact {
-    margin-right: 20px;
+    margin-right: 1.25rem;
 }
 .account-name {
-    margin-right: 20px;
+    margin-right: 1.25rem;
 }
 .account-icon {
     width: 20px;
@@ -54,5 +47,5 @@
 hr {
     border: none;
     border-top: 1px solid #eee;
-    margin: 10px 0;
+    margin: 0.625rem 0;
 }

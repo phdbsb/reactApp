@@ -1,19 +1,21 @@
 import { useEffect, useState } from "react"; 
 import Exam from "./Exam";
-import { Form } from "components/Form";
-import { fetchExams, updateExam } from "store/thunks/examsThunks";
-import { RootState, AppDispatch } from "store";
-import { ExamCard } from "models/ExamCard"; 
+import { Form } from "../Form";
 import { parseISO, formatDistanceToNow, isPast } from 'date-fns';
 import "./style.css";
-import { useDispatch, useSelector } from "react-redux";
-import useSaveExam from "hooks/useSaveExam";
-import Popup from "components/Popup/Popup";
+import Popup from "../Popup/Popup";
+import { useMemo } from "react";
+import { ExamCard } from "@/api/endpoints/exams/types";
+import { useAddExamMutation, useGetExamsQuery, useUpdateExamMutation } from "@/api/endpoints/exams";
+import { useRegisterExamMutation } from "@/api/endpoints/registrations";
 
 
 const Exams = () => {
-    const exams = useSelector((state: RootState) => state.exams.exams);
-    const dispatch = useDispatch<AppDispatch>();
+    const { data: exams } = useGetExamsQuery();
+    const [addExam] = useAddExamMutation();
+    const [updateExam] = useUpdateExamMutation();
+    const [registerExam] = useRegisterExamMutation();
+
 
     const [formState, setFormState] = useState ({
         isEditMode: false,
@@ -23,28 +25,33 @@ const Exams = () => {
 
     const [selectedExam, setSelectedExam] = useState<ExamCard | null>(null);
     const [selectedTerms, setSelectedTerms] = useState<Record<string, string>>({});
-    const [timeLeftMap, setTimeLeftMap] = useState<Record<string, string>>({});
-
-    const { saveExam } = useSaveExam();
-
+    const [timeLeftMap, setTimeLeftMap] = useState<Record<string, string>>({});   
+    
+    
     useEffect(() => {
-        dispatch(fetchExams());
-    }, [dispatch]);
+        const updateTimes = () => {
+            const updatedTimeLeftMap: Record<string, string> = {};
 
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setTimeLeftMap(() => {
-                const newTimeLeftMap: Record<string, string> = {};
-                exams.forEach((exam) => {
-                    newTimeLeftMap[exam.id] = calculateTimeLeft(exam) || "";
-                });
-                return newTimeLeftMap;
+            exams?.forEach((exam) => {
+                if(exam.term) {
+                    const examDate = parseISO(exam.term);
+                    const isExpired = isPast(examDate);
+                    if(!isExpired) {
+                        const timeLeft = formatDistanceToNow(parseISO(exam.term), { includeSeconds: true, addSuffix: true });
+                        updatedTimeLeftMap[exam.id] = timeLeft;
+                    }
+                }
             });
-        });
+
+            setTimeLeftMap(updatedTimeLeftMap);
+        };
+
+        updateTimes();
+        const interval = setInterval(updateTimes, 60000);
 
         return () => clearInterval(interval);
     }, [exams, selectedTerms]);
-
+    
     const onExamDoubleClick = (exam: ExamCard) => {
         setFormState({
             isEditMode: true,
@@ -57,11 +64,6 @@ const Exams = () => {
         setSelectedExam(exam);
     }
 
-    const onPassClick = async (exam: ExamCard) => {
-        const updatedExam = { ...exam, isPassed: !exam.isPassed };
-        dispatch(updateExam(updatedExam));
-    };
-
     const onCreateClick = () => {
         setFormState({
             isEditMode: false,
@@ -71,7 +73,13 @@ const Exams = () => {
     };
     
     const handleSave = async (exam: ExamCard) => {
-        await saveExam(exam, formState);
+        
+        if (formState.isEditMode && formState.examToEditId) {
+            const updatedExam: ExamCard = { id: exam.id, title: exam.title, semester: exam.semester, schedule: exam.schedule }
+            await updateExam(updatedExam);
+        } else {
+            await addExam(exam);
+        }
         
         setFormState({
             isEditMode: false,
@@ -80,38 +88,59 @@ const Exams = () => {
         });
     };
 
-    const handlePopupSave = (term: string) => {
+    const handleCloseForm = () => {
+        setFormState({
+            isEditMode: false,
+            examToEditId: null,
+            showForm: false,
+        });
+    };
+
+    const handlePopupSave = async (term: string) => {
         if (selectedExam) {
             setSelectedTerms((prev) => ({
                 ...prev,
                 [selectedExam.id]: term,
             }));
+
+            try {
+                await registerExam({
+                    studentId: "920dae77-9480-41c8-8cec-b2fe902d835f",
+                    examId: selectedExam.id,
+                    deadlineId: term,
+                }).unwrap();
+
+            } catch (error) {
+                console.error("Error when registering for the exam", error);
+            }
             setSelectedExam(null);
         }
     };
 
-    const examToEdit = formState.examToEditId ? exams.find((exam) => exam.id === formState.examToEditId) : undefined;
-
-    const calculateTimeLeft = (exam: ExamCard) => {
-        const selectedTerm = selectedTerms[exam.id];
-        if (!selectedTerm) return null;
-
-        const examDate = parseISO(exam.schedule[selectedTerm]);
-        if (isNaN(examDate.getTime())) return "Invalid date";
-
-        return isPast(examDate) ? "Time is up" : formatDistanceToNow(examDate, { addSuffix: true });
-    };
-
+    const examToEdit = useMemo(() => {
+        return formState.examToEditId ? exams?.find((exam) => exam.id === formState.examToEditId) : undefined;
+    }, [formState.examToEditId, exams]);
 
     return (
         <>
-            <div className="exams-container">
-                {exams.map((exam, index) => (
-                    <Exam key={`${exam.id}-${index}`} exam={exam} onDoubleClick={onExamDoubleClick} onReportClick={onReportClick} onPassClick={onPassClick} timeLeft={timeLeftMap[exam.id] || ""}/>
-                ))}
-            </div>
-            <div className="create-button-container">
-                <button className="create-button" onClick={onCreateClick}> Create Exam </button>
+            <div className="exam-container">
+                <div className="exams-wrapper">
+                    <div className="nav-exams">
+                        <h1 className="exams-title">My Exams</h1>
+                        <button className="create-button" onClick={onCreateClick}> <img src="images/add.svg" width="22px" alt="" /> Create </button>
+                    </div>
+                    <div className="exams-container">
+                        {exams?.map((exam, index) => (
+                            <Exam 
+                                key={`${exam.id}-${index}`} 
+                                exam={exam} 
+                                onDoubleClick={onExamDoubleClick} 
+                                onReportClick={onReportClick} 
+                                timeLeft={timeLeftMap[exam.id] || ""}
+                            />
+                        ))}
+                    </div>
+                </div>
             </div>
             {formState.showForm && (
                 <div className="form-container">
@@ -119,6 +148,7 @@ const Exams = () => {
                         isEditMode={formState.isEditMode}
                         examToEdit={examToEdit}
                         onSave={handleSave}
+                        onClose={handleCloseForm}
                     />
                 </div>
             )}

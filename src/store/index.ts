@@ -1,10 +1,14 @@
 import { configureStore} from "@reduxjs/toolkit";
 import examsReducer from './features/examsSlice';
+import { baseApi } from "@/api";
 
 export const store = configureStore({
     reducer: {
-        exams: examsReducer
-    }
+        exams: examsReducer,
+        [baseApi.reducerPath]: baseApi.reducer,
+    },
+    middleware: (getDefaultMiddleware) =>
+        getDefaultMiddleware().concat(baseApi.middleware),
 });
 
 export type RootState = ReturnType<typeof store.getState>;

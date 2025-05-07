@@ -1,7 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IExamCard } from "./ExamCardInterface";
-// import { fetchExams, addExam, updateExam, removeExam } from "store/thunks/examsThunks";
-import { fetchExams, addExam, removeExam,updateExam } from "../thunks/examsThunks";
+import { fetchExams, addExam, removeExam, updateExam } from "../thunks/examsThunks";
 
 
 interface ExamsState {
