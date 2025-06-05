@@ -71,6 +71,19 @@ form input:focus, form select:focus {
   border: 1px solid var(--disabled);
 }
 
+.save-button {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 0.625rem 1.25rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.save-button:hover {
+  background-color: var(--primary-color-hover);
+}
+
 .form-buttons .close-button:hover {
   background-color: var(--close-button-hover);
 }

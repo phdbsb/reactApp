@@ -38,8 +38,8 @@ const lightTheme = createTheme({
 });
 
 export const returnTheme = (themeMode: string) => {
-  if (themeMode === "dark")
+  if (themeMode === "dark") {
     return darkTheme;
-  else
-    return lightTheme;
+  }
+  return lightTheme;
 }

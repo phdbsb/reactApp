@@ -1,6 +1,6 @@
 import FormManager from "./FormManager";
 import dayjs from "dayjs";
-import './style.css';
+import styles from './style.module.css';
 import { ExamCard } from "@/api/endpoints/exams/types";
 
 interface FormProps {
@@ -35,7 +35,7 @@ const Form = ({ isEditMode, examToEdit, onSave, onClose }: FormProps) => {
     };
 
     return (
-        <div className="form-wrapper">
+        <div className={styles["form-wrapper"]}>
             <h2>{isEditMode ? "Edit Exam" : "Create Exam"}</h2>
             <FormManager
                 initialData={initialFormData}

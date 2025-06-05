@@ -3,8 +3,8 @@ import dayjs, { Dayjs } from "dayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import "./style.css";
 import { useEffect, useState } from "react";
+import styles from './style.module.css';
 
 interface FormData {
     title: string;
@@ -57,8 +57,8 @@ const FormManager = ({ initialData, onSave, onClose, isEditMode }: FormManagerPr
                     control={control}
                     render={({ field }) => (
                         <select {...field}>
-                            <option value={1} className='option1'>Semester 1</option>
-                            <option value={2} className='option1'>Semester 2</option>
+                            <option value={1} className={styles['option1']}>Semester 1</option>
+                            <option value={2} className={styles['option1']}>Semester 2</option>
                         </select>
                     )}
                 />
@@ -97,9 +97,9 @@ const FormManager = ({ initialData, onSave, onClose, isEditMode }: FormManagerPr
                     {errors[name as keyof FormData] && <span>{errors[name as keyof FormData]?.message}</span>}
                 </div>
             ))}
-            <div className="form-buttons">
-                <button type="button" className="close-button" onClick={onClose}>Close</button>
-                <button type="submit" className="save-button">{isEditMode ? "Save" : "Create"}</button>
+            <div className={styles["form-buttons"]}>
+                <button type="button" className={styles["close-button"]} onClick={onClose}>Close</button>
+                <button type="submit" className={styles["save-button"]}>{isEditMode ? "Save" : "Create"}</button>
             </div>
         </form>
     );

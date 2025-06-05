@@ -3,8 +3,8 @@ import { baseApi } from "@/api";
 
 export const registrationsApi = baseApi.injectEndpoints({
     endpoints: (builder) => ({
-        getPassedStatus: builder.query<boolean, {studentId: String, examId: string}> ({
-            query: ({studentId, examId}) => `registrations/passed-status?studentId=${studentId}&examId=${examId}`,
+        getPassedStatus: builder.query<boolean, {examId: string}> ({
+            query: ({examId}) => `registrations/passed-status?examId=${examId}`,
             providesTags: ["Exams", "Registrations"]
         }),
         

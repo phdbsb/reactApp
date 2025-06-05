@@ -1,42 +1,49 @@
 import { IDeadline } from "@/api/endpoints/deadlines/types";
 import { format } from "date-fns";
+import styles from "./style.module.css";
 
 interface TermSelectionProps {
-    deadlines: IDeadline[];
-    selectedTerm: string;
-    onSelectTerm: (term: string) => void;
+  deadlines: IDeadline[];
+  selectedTerm: string;
+  onSelectTerm: (term: string) => void;
 }
 
-const TermSelection = ({ deadlines, selectedTerm, onSelectTerm }: TermSelectionProps) => {
-    const currentDate = new Date();
+const TermSelection = ({
+  deadlines,
+  selectedTerm,
+  onSelectTerm,
+}: TermSelectionProps) => {
+  const currentDate = new Date();
 
-    return (
-        <div>
-            <strong>Choose a deadline: </strong>
-            <div className="term-options">
-                {deadlines.map((deadline) => {
-                    const termDate = new Date(deadline.examDate);
-                    const isPast = termDate < currentDate;
-                    return (
-                        <div key={deadline.id} className="term-option">
-                            <label className="term-label">
-                                <input
-                                    type="checkbox"
-                                    value={deadline.id}
-                                    checked={selectedTerm === deadline.id}
-                                    disabled={isPast}
-                                    onChange={() => onSelectTerm(deadline.id)}
-                                />
-                                <span className={`term-text ${isPast ? "disabled-text" : ""}`}>
-                                    {deadline.name}: {format(termDate, 'dd.MM.yyyy')}
-                                </span>
-                            </label>
-                        </div>
-                    );
-                })}
-            </div>
-        </div>
-    );
+  return (
+    <div>
+      <strong>Choose a deadline: </strong>
+      <div className={styles["term-options"]}>
+        {deadlines.map((deadline) => (
+          <div key={deadline.id} className={styles["term-option"]}>
+            <label className={styles["term-label"]}>
+              <input
+                type="checkbox"
+                value={deadline.id}
+                checked={selectedTerm === deadline.id}
+                disabled={new Date(deadline.examDate) < currentDate}
+                onChange={() => onSelectTerm(deadline.id)}
+              />
+              <span
+                className={`${styles["term-text"]} ${
+                  new Date(deadline.examDate) < currentDate 
+                    ? styles["disabled-text"] 
+                    : ""
+                }`}
+              >
+                {deadline.name}: {format(new Date(deadline.examDate), "dd.MM.yyyy")}
+              </span>
+            </label>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
 };
 
 export default TermSelection;

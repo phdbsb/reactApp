@@ -1,5 +1,4 @@
 export interface IRegistration {
-    studentId: string;
     examId: string;
     deadlineId: string;
 }

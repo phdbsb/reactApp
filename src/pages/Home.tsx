@@ -1,18 +1,15 @@
 import { Navbar } from "@/components/Navbar"
 import Exams from "@/components/Exams/Exams";
-import { useState } from "react";
-import { returnTheme } from "@/styles/palette";
-import { ThemeProvider } from "@mui/material";
 
 interface HomeProps {
-    themeMode: string;
-    setThemeMode: React.Dispatch<React.SetStateAction<string>>;
+    themeMode: "light" | "dark";
+    toggleTheme: () => void; 
 }
 
-const HomePage = ({ themeMode, setThemeMode } : HomeProps) => {
+const HomePage = ({ themeMode, toggleTheme } : HomeProps) => {
     return (
         <>
-            <Navbar themeMode={themeMode} setThemeMode={setThemeMode}/>
+            <Navbar themeMode={themeMode} toggleTheme={toggleTheme}/>
             <Exams />
         </>     
     );

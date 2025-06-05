@@ -1,63 +1,68 @@
-.formContainer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #ffffff;
+body {
+  margin: 0;
+}
+
+.pageContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--background-primary); 
+  height: 100vh;
+}
+
+.logRegCard {
+  display: flex;
+  width: 830px;
+  height: 530px;
+  border-radius: 20px;
+  border: 2px solid var(--border);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  background-color: var(--background-primary);
+  padding: 20px;
+}
+
+.leftPane, .rightPane {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.leftPane {
+  flex: 1;
+  background-color:#b7b8b8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
 }
 
 .formBox {
-    background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 400px;
-}
-
-.inputField {
-    margin-bottom: 15px;
-    width: 100%;
+  width: 80%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
 }
 
 .submitButton {
-    width: 100%;
-    padding: 10px;
-    background-color: #3f51b5;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s;
+  width: 30%;
 }
 
-.submitButton:hover {
-    background-color: #303f9f;
+.switchText {
+  margin-top: 4rem;
+  font-size: 0.1rem;
 }
 
-.switchFormText {
-    text-align: center;
-    font-size: 12px;
-    color: #555;
-    cursor: pointer;
-}
-
-.switchFormText:hover {
-    text-decoration: underline;
-}
-
-.pageWrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background-color: rgb(255, 255, 255);
+.signLink {
+  color: #2188a3;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 0.9rem;
 }
 
 .errorText {
-    color: red;
-    font-size: 0.9rem;
-    margin-top: 0.5rem;
-    text-align: center;
+  color: red;
+  font-size: 0.9rem;
+  margin-top: -0.5rem;
 }
-  

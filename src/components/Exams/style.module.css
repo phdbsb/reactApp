@@ -1,0 +1,209 @@
+.exam-container {
+  max-width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 0 1.25rem;
+}
+
+.exams-wrapper {
+  font-family: Arial, Helvetica, sans-serif;
+  display: grid;
+  grid-template-columns: repeat(4, 340px);
+  gap: 20px;
+  width: 100%;
+  max-width: calc(4 * 340px + 3 * 20px);
+  padding: 1.25rem;
+  margin: 0 auto;
+}
+
+.nav-exams {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+}
+
+.exams-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-block: 0rem;
+}
+
+.create-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.create-button:hover {
+  background-color: #0056b3;
+}
+
+.exams-container {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(4, 340px);
+  gap: 20px;
+}
+
+.exam-card {
+  position: relative;
+  width: 300px;
+  border: 3px solid transparent;
+  border-radius: 8px;
+  padding: 1rem;
+  border: 2px solid var(--border);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  justify-content: flex-start;
+  padding-left: 20px;
+}
+
+@media (max-width: 1520px) {
+  .exams-wrapper,
+  .exams-container {
+    grid-template-columns: repeat(3, 340px);
+    max-width: calc(3 * 340px + 2 * 20px);
+  }
+}
+
+@media (max-width: 1120px) {
+  .exams-wrapper,
+  .exams-container {
+    grid-template-columns: repeat(2, 340px);
+    max-width: calc(2 * 340px + 1 * 20px);
+  }
+}
+
+@media (max-width: 720px) {
+  .exams-wrapper,
+  .exams-container {
+    grid-template-columns: 340px;
+    max-width: 340px;
+  }
+}
+
+.exam-card.passed {
+  border: 2px solid var(--border-pass);
+}
+
+.exam-faculty {
+  padding: 0.25rem 0;
+}
+
+.exam-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.exam-footer {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.875rem;
+  margin-top: 0.625rem;
+  align-items: center;
+}
+
+.pass-button {
+  padding: 0.25rem 0.5rem;
+}
+
+.pass-button:hover {
+  background-color: var(--primary-passbtn-hover);
+  border-radius: 4px;
+}
+
+.exam-title {
+  font-size: 1.125rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+.apply-button {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 0.313rem 0.625rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.875rem;
+  font-family: arial;
+}
+
+.apply-button:hover {
+  background-color: var(--primary-color-hover);
+}
+
+.apply-button:disabled {
+  background-color: var(--disabled);
+  cursor: not-allowed;
+}
+
+.exam-time {
+  color: var(--warning);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.create-button {
+  font-family: arial;
+  padding: 0.3rem 0.8rem;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  margin-left: 40px;
+}
+
+.create-button:hover {
+  background-color: var(--primary-color-hover);
+}
+
+.edit-icon {
+  font-size: 1rem;
+  color: #555;
+  background-color: white;
+  border-radius: 50%;
+  padding: 4px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  z-index: 10;
+}
+
+.edit-icon:hover {
+  color: var(--primary-color);
+}
+
+.icon-wrapper {
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translate(30%, -30%);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  z-index: 10;
+  background-color: var(--background-primary);
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.exam-card:hover .icon-wrapper,
+.icon-visible {
+  opacity: 1 !important;
+}
