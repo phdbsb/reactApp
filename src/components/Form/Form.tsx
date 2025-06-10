@@ -2,6 +2,7 @@ import FormManager from "./FormManager";
 import dayjs from "dayjs";
 import styles from './style.module.css';
 import { ExamCard } from "@/api/endpoints/exams/types";
+import { useTranslation } from "react-i18next";
 
 interface FormProps {
     isEditMode: boolean;
@@ -11,6 +12,7 @@ interface FormProps {
 }
 
 const Form = ({ isEditMode, examToEdit, onSave, onClose }: FormProps) => {
+    const { t } = useTranslation();
 
     const initialFormData = {
         title: examToEdit?.title || "",
@@ -36,7 +38,7 @@ const Form = ({ isEditMode, examToEdit, onSave, onClose }: FormProps) => {
 
     return (
         <div className={styles["form-wrapper"]}>
-            <h2>{isEditMode ? "Edit Exam" : "Create Exam"}</h2>
+            <h2>{isEditMode ? t("form.editExam") : t("form.createExam")}</h2>
             <FormManager
                 initialData={initialFormData}
                 onSave={handleSave}

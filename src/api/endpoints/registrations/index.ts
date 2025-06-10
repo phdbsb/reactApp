@@ -8,6 +8,11 @@ export const registrationsApi = baseApi.injectEndpoints({
             providesTags: ["Exams", "Registrations"]
         }),
         
+        getPassedExams: builder.query<UpdatePassedModel[], void>({
+            query: () => `registrations/passed-exams`,
+            providesTags: ["Registrations"]
+        }),
+
         registerExam: builder.mutation<void, IRegistration>({
             query: (registration) => ({
                 url: "registrations",
@@ -31,6 +36,7 @@ export const registrationsApi = baseApi.injectEndpoints({
 
 export const {
     useGetPassedStatusQuery,
+    useGetPassedExamsQuery,
     useRegisterExamMutation,
     useUpdatePassedStatusMutation
 } = registrationsApi;

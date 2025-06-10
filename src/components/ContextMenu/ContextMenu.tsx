@@ -2,6 +2,7 @@ import { MdOutlineEdit } from "react-icons/md";
 import { FaRegTrashAlt } from "react-icons/fa";
 import styles from "./style.module.css";
 import { useEffect, useRef } from "react";
+import { useTranslation } from "react-i18next";
 
 interface ContextMenuProps {
   onEdit: () => void;
@@ -11,6 +12,7 @@ interface ContextMenuProps {
 
 const ContextMenu = ({ onEdit, onDelete, onClose }: ContextMenuProps) => {
   const menuRef = useRef<HTMLDivElement>(null);
+  const { t } = useTranslation();
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -37,7 +39,7 @@ const ContextMenu = ({ onEdit, onDelete, onClose }: ContextMenuProps) => {
         }}
       >
         <MdOutlineEdit className={styles["menu-icon"]} />
-        <span>Edit</span>
+        <span>{t("menu.edit")}</span>
       </div>
       <div
         className={styles["menu-item2"]}
@@ -47,7 +49,7 @@ const ContextMenu = ({ onEdit, onDelete, onClose }: ContextMenuProps) => {
         }}
       >
         <FaRegTrashAlt className={styles["menu-icon"]} />
-        <span>Remove</span>
+        <span>{t("menu.remove")}</span>
       </div>
     </div>
   );

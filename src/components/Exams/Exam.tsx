@@ -8,6 +8,7 @@ import {
 import { useState } from "react";
 import { TbEditCircle } from "react-icons/tb";
 import ContextMenu from "../ContextMenu/ContextMenu";
+import { useTranslation } from "react-i18next";
 
 interface ExamCardProps {
   exam: IGetExams;
@@ -19,7 +20,6 @@ interface ExamCardProps {
 
 const Exam = ({
   exam,
-  // selectedDeadlineId,
   onEditClick,
   onDeleteClick,
   onReportClick,
@@ -33,6 +33,7 @@ const Exam = ({
     currentSemester === 2 || (currentSemester === 1 && exam.semester === 1);
 
   const { data: passedStatus } = useGetPassedStatusQuery({ examId: exam.id });
+  const { t } = useTranslation();
 
   const onPassClick = async (exam: ExamCard) => {
     try {
@@ -80,23 +81,23 @@ const Exam = ({
           }
           onClick={() => onReportClick(exam)}
         >
-          Report exam
+          {t("exam.report")}
         </button>
       </div>
       <div className={styles["exam-footer"]}>
-        <span className={styles["exam-faculty"]}>Faculty of Electronics</span>
+        <span className={styles["exam-faculty"]}>{t("faculty")}</span>
         {exam.isRegistered && (
           <>
             {timeLeft !== "" ? (
               <span className={styles["exam-time"]}>
-                {timeLeft ? `Starts ${timeLeft}` : "No start time"}
+                {timeLeft ? t("exam.startsIn", {time: timeLeft}) : t("exam.noStartTime")}
               </span>
             ) : (
               <span
                 className={styles["pass-button"]}
                 onClick={() => onPassClick(exam)}
               >
-                {passedStatus ? "Didn't passed" : "Passed"}
+                {passedStatus ? t("exam.notPassed") : t("exam.passed")}
               </span>
             )}
           </>

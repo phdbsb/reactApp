@@ -14,6 +14,7 @@ import { useNavigate } from "react-router";
 import { useLogoutMutation } from "@/api/endpoints/auth";
 import { useDispatch } from "react-redux";
 import { baseApi } from "@/api";
+import { useTranslation } from "react-i18next";
 
 
 const AccountMenu = () => {
@@ -23,6 +24,7 @@ const AccountMenu = () => {
 
   const [logout] = useLogoutMutation();
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -100,29 +102,29 @@ const AccountMenu = () => {
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
         <MenuItem onClick={handleClose}>
-          <Avatar /> Profile
+          <Avatar /> {t('accountMenu.profile')}
         </MenuItem>
         <MenuItem onClick={handleClose}>
-          <Avatar /> My account
+          <Avatar /> {t('accountMenu.myAccount')}
         </MenuItem>
         <Divider />
         <MenuItem onClick={handleClose}>
           <ListItemIcon>
             <PersonAdd fontSize="small" />
           </ListItemIcon>
-          Add another account
+          {t('accountMenu.addAnotherAccount')}
         </MenuItem>
         <MenuItem onClick={handleClose}>
           <ListItemIcon>
             <Settings fontSize="small" />
           </ListItemIcon>
-          Settings
+          {t('accountMenu.settings')}
         </MenuItem>
         <MenuItem onClick={handleLogout}>
           <ListItemIcon>
             <Logout fontSize="small" />
           </ListItemIcon>
-          Logout
+          {t('accountMenu.logout')}
         </MenuItem>
       </Menu>
     </React.Fragment>

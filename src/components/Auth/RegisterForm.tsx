@@ -16,6 +16,7 @@ import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { FetchError } from "@/models/error";
 import { motion } from "framer-motion";
 import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
 
 interface RegisterFormData extends IReg {
   confirmPassword: string;
@@ -33,6 +34,7 @@ const RegisterForm = () => {
   const [logError, setlogError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const { t } = useTranslation();
 
   const handleTogglePassword =
     (field: "password" | "confirmPassword") =>
@@ -55,7 +57,7 @@ const RegisterForm = () => {
         toast.error("Registration failed: " + errorData.data);
         return;
       }
-      toast.success("Registration successful!");
+      toast.success(t("logRegText.register"));
       navigate("/");
     } catch (err) {
       console.log("Error", err);
@@ -130,7 +132,7 @@ const RegisterForm = () => {
             className={styles["formBox"]}
           >
             <Typography variant="h5" className={styles["formTitle"]}>
-              Create an Account
+              {t('logRegForm.createAccount')}
             </Typography>
             {registerFields.map((field) => (
               <TextField
@@ -155,7 +157,7 @@ const RegisterForm = () => {
                       : "password"
                     : field.type
                 }
-                label={field.label}
+                label={t(`logRegForm.${field.name}`)}
                 className={styles["inputField"]}
                 {...register(field.name as keyof RegisterFormData, {
                   required: field.required,
@@ -163,13 +165,13 @@ const RegisterForm = () => {
                   ...(field.name === "email" && {
                     pattern: {
                       value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                      message: "Invalid email format",
+                      message: t('logRegForm.invalidEmail'),
                     },
                   }),
                   ...(field.name === "password" && {
                     minLength: {
                       value: 8,
-                      message: "Password must have minimum 8 characters",
+                      message: t('logRegForm.passwordMinLength'),
                     },
                   }),
                 })}
@@ -214,20 +216,20 @@ const RegisterForm = () => {
               variant="contained"
               type="submit"
               className={styles["submitButton"]}
-              sx={{ marginTop: "1.25rem" }}
+              sx={{ marginTop: "1.25rem", fontSize: "0.8rem" }}
             >
-              Sign up
+              {t('logRegForm.signUp')}
             </Button>
             <Typography
               className={styles["switchText"]}
               sx={{ fontSize: "0.85rem", marginTop: "3rem" }}
             >
-              Already have an account?{" "}
+              { t('logRegForm.haveAccount')}{" "}
               <span
                 className={styles["signLink"]}
                 onClick={() => navigate("/login")}
               >
-                Sign in
+                {t('logRegForm.signIn')}
               </span>
             </Typography>
           </Box>

@@ -46,7 +46,8 @@ body {
 }
 
 .submitButton {
-  width: 30%;
+  padding: 0.313rem 0.625rem;
+  width: 8.125rem;
 }
 
 .switchText {
@@ -58,7 +59,7 @@ body {
   color: #2188a3;
   cursor: pointer;
   font-weight: bold;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
 }
 
 .errorText {

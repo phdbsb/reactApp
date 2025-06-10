@@ -5,6 +5,7 @@ import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { useEffect, useState } from "react";
 import styles from './style.module.css';
+import { useTranslation } from "react-i18next";
 
 interface FormData {
     title: string;
@@ -25,25 +26,26 @@ const FormManager = ({ initialData, onSave, onClose, isEditMode }: FormManagerPr
     const { control, handleSubmit, formState: { errors }, reset } = useForm<FormData>({
         defaultValues: initialData
     });
+    const { t } = useTranslation();
 
     useEffect(() => {
         reset(initialData);
     }, [reset]);
 
     const deadlines = [
-        { label: "January deadline:", name: "januaryDate" },
-        { label: "March deadline:", name: "marchDate" },
-        { label: "August deadline:", name: "augustDate" }
+        { label:  t("form.januaryDeadline"), name: "januaryDate" },
+        { label: t("form.marchDeadline"), name: "marchDate" },
+        { label: t("form.augustDeadline"), name: "augustDate" }
     ];
 
     return (
         <form onSubmit={handleSubmit(onSave)}>
             <div>
-                <label>Title:</label>
+                <label>{t("form.title")}:</label>
                 <Controller
                     name="title"
                     control={control}
-                    rules={{ required: "This field is required" }}
+                    rules={{ required: t("form.requiredField") }}
                     render={({ field }) => (
                         <input {...field} />
                     )}
@@ -51,14 +53,14 @@ const FormManager = ({ initialData, onSave, onClose, isEditMode }: FormManagerPr
                 {errors.title && <span>{errors.title.message}</span>}
             </div>
             <div>
-                <label>Semester:</label>
+                <label>{t("form.semester")}:</label>
                 <Controller
                     name="semester"
                     control={control}
                     render={({ field }) => (
                         <select {...field}>
-                            <option value={1} className={styles['option1']}>Semester 1</option>
-                            <option value={2} className={styles['option1']}>Semester 2</option>
+                            <option value={1} className={styles['option1']}>{t("form.semester1")}</option>
+                            <option value={2} className={styles['option1']}>{t("form.semester2")}</option>
                         </select>
                     )}
                 />
@@ -71,7 +73,7 @@ const FormManager = ({ initialData, onSave, onClose, isEditMode }: FormManagerPr
                         <Controller
                             name={name as keyof FormData}
                             control={control}
-                            rules={{ required: "This field is required" }}
+                            rules={{ required: t("form.requiredField") }}
                             render={({ field }) => (
                                 <DateTimePicker
                                     sx={{
@@ -81,7 +83,6 @@ const FormManager = ({ initialData, onSave, onClose, isEditMode }: FormManagerPr
                                         },
                                         ".MuiOutlinedInput-root": {
                                             bgcolor: (t) => t.palette.grey[100]
-
                                         },
                                         ".MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
                                             borderColor: (t) => t.palette.divider,
@@ -98,8 +99,8 @@ const FormManager = ({ initialData, onSave, onClose, isEditMode }: FormManagerPr
                 </div>
             ))}
             <div className={styles["form-buttons"]}>
-                <button type="button" className={styles["close-button"]} onClick={onClose}>Close</button>
-                <button type="submit" className={styles["save-button"]}>{isEditMode ? "Save" : "Create"}</button>
+                <button type="button" className={styles["close-button"]} onClick={onClose}>{t("form.close")}</button>
+                <button type="submit" className={styles["save-button"]}>{isEditMode ? t("form.save") : t("form.create")}</button>
             </div>
         </form>
     );

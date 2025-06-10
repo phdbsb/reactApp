@@ -1,4 +1,5 @@
 import AccountMenu from "./AccountMenu";
+import LanguageToggle from "./LanguageToggle";
 import styles from "./style.module.css";
 
 interface themeProps {
@@ -10,6 +11,7 @@ const Navbar = ({ themeMode, toggleTheme }: themeProps) => {
   return (
     <nav className={styles["navbar-container"]}>
       <div className={styles["icons-container"]}>
+        <LanguageToggle />
         <div className={styles["theme-icon"]}>
           <img
             src={themeMode === "light" ? "/assets/Moon.svg" : "/assets/Sun.svg"}
@@ -18,7 +20,7 @@ const Navbar = ({ themeMode, toggleTheme }: themeProps) => {
             style={{ cursor: "pointer" }}
           />
         </div>
-          <AccountMenu />
+        <AccountMenu />
       </div>
     </nav>
   );

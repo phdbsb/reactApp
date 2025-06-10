@@ -5,22 +5,28 @@ import { parseISO, formatDistanceToNow, isPast } from "date-fns";
 import styles from "./style.module.css";
 import Popup from "../Popup/Popup";
 import { useMemo } from "react";
-import { ExamCard } from "@/api/endpoints/exams/types";
+import { ExamCard, IGetExams } from "@/api/endpoints/exams/types";
 import {
   useAddExamMutation,
   useArchiveExamMutation,
   useGetExamsQuery,
   useUpdateExamMutation,
 } from "@/api/endpoints/exams";
-import { useRegisterExamMutation } from "@/api/endpoints/registrations";
+import {
+  useGetPassedExamsQuery,
+  useRegisterExamMutation,
+} from "@/api/endpoints/registrations";
 import ConfirmDialog from "../ConfirmDialog/ConfirmDialog";
+import { useTranslation } from "react-i18next";
 
 const Exams = () => {
   const { data: exams } = useGetExamsQuery();
+  const { data: passedExams } = useGetPassedExamsQuery();
   const [addExam] = useAddExamMutation();
   const [updateExam] = useUpdateExamMutation();
   const [registerExam] = useRegisterExamMutation();
   const [archiveExam] = useArchiveExamMutation();
+  const { t } = useTranslation();
 
   const [formState, setFormState] = useState({
     isEditMode: false,
@@ -150,23 +156,52 @@ const Exams = () => {
     setShowConfirmDialog(false);
   };
 
+  const mappedPassedExams = passedExams
+    ?.filter((pe) => pe.passed)
+    .map((pe) => {
+      const fullExam = exams?.find((exam) => exam.id === pe.examId);
+      return fullExam ? { ...fullExam } : null;
+    })
+    .filter((exam): exam is IGetExams => exam !== null);
+
+  const notPassedExams = exams?.filter(
+    (exam) => !passedExams?.some((pe) => pe.examId === exam.id && pe.passed)
+  );
+
   return (
     <>
       <div className={styles["exam-container"]}>
         <div className={styles["exams-wrapper"]}>
           <div className={styles["nav-exams"]}>
-            <h1 className={styles["exams-title"]}>My Exams</h1>
+            <h1 className={styles["exams-title"]}>{t("exam.title")}</h1>
             <button className={styles["create-button"]} onClick={onCreateClick}>
               {" "}
-              <img src="assets/add.svg" width="22px" alt="" /> Create{" "}
+              <img src="assets/add.svg" width="22px" alt="" />
+              {t("exam.create")}{" "}
             </button>
           </div>
           <div className={styles["exams-container"]}>
-            {exams?.map((exam, index) => (
+            {notPassedExams?.map((exam, index) => (
               <Exam
                 key={`${exam.id}-${index}`}
                 exam={exam}
-                // selectedDeadlineId={selectedTerms[exam.id]}
+                onEditClick={onEditClick}
+                onDeleteClick={onDeleteClick}
+                onReportClick={onReportClick}
+                timeLeft={timeLeftMap[exam.id] || ""}
+              />
+            ))}
+          </div>
+          <h2 className={styles["passed-title"]}>
+            {(mappedPassedExams?.length ?? 0) > 0
+              ? t("exam.passedExams")
+              : t("exam.noPassedExams")}
+          </h2>
+          <div className={styles["passed-exams-container"]}>
+            {mappedPassedExams?.map((exam, index) => (
+              <Exam
+                key={`${exam.id}-${index}`}
+                exam={exam}
                 onEditClick={onEditClick}
                 onDeleteClick={onDeleteClick}
                 onReportClick={onReportClick}

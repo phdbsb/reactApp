@@ -3,6 +3,7 @@ import TermSelection from "./TermSelection";
 import styles from "./style.module.css";
 import { ExamCard } from "@/api/endpoints/exams/types";
 import { useGetDeadlinesQuery } from "@/api/endpoints/deadlines";
+import { useTranslation } from "react-i18next";
 
 interface PopupProps {
   exam: ExamCard;
@@ -13,6 +14,7 @@ interface PopupProps {
 const Popup = ({ exam, onClose, onSave }: PopupProps) => {
   const { data: deadlines } = useGetDeadlinesQuery(exam.id);
   const [selectedTerm, setSelectedTerm] = useState<string>("");
+  const { t } = useTranslation();
 
   const handleSave = () => {
     if (!selectedTerm) {
@@ -46,7 +48,7 @@ const Popup = ({ exam, onClose, onSave }: PopupProps) => {
 
         <div className={styles["popup-footer"]}>
           <button className={styles["save-button"]} onClick={handleSave}>
-            Save
+            {t("form.save") }
           </button>
         </div>
       </div>

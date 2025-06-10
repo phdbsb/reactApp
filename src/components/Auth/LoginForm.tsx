@@ -16,6 +16,8 @@ import { useState } from "react";
 import { FetchError } from "@/models/error";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
+
 
 const LoginForm = () => {
   const {
@@ -27,6 +29,7 @@ const LoginForm = () => {
   const navigate = useNavigate();
   const [loginError, setLoginError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const { t } = useTranslation();
 
   const onSubmit = async (data: ILogin) => {
     setLoginError("");
@@ -38,7 +41,7 @@ const LoginForm = () => {
         toast.error("Login failed: " + errorData.data);
         return;
       }
-      toast.success("Login successful!");
+      toast.success(t("logRegText.login"));
       navigate("/");
     } catch (err) {
       console.log("Error", err);
@@ -93,7 +96,7 @@ const LoginForm = () => {
             className={styles["formBox"]}
           >
             <Typography variant="h5" className={styles["formTitle"]}>
-              Welcome back
+              {t('logRegForm.welcomeBack')}
             </Typography>
             {LoginFields.map((field) => (
               <TextField
@@ -105,7 +108,7 @@ const LoginForm = () => {
                       : "password"
                     : field.type
                 }
-                label={field.label}
+                label={t(`logRegForm.${field.label.toLowerCase()}`)}
                 sx={{
                   "& input": { fontSize: "0.875rem" },
                   "& .MuiOutlinedInput-root": {
@@ -117,17 +120,17 @@ const LoginForm = () => {
                 size="small"
                 className={styles["inputField"]}
                 {...register(field.name as keyof ILogin, {
-                  required: field.required,
+                  required: t(`logRegForm.${field.required.toLowerCase()}`),
                   ...(field.name === "email" && {
                     pattern: {
                       value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                      message: "Invalid email format",
+                      message: t('logRegForm.invalidEmail'),
                     },
                   }),
                   ...(field.name === "password" && {
                     minLength: {
                       value: 8,
-                      message: "Password must be at least 8 characters",
+                      message: t('logRegForm.passwordMinLength'),
                     },
                   }),
                 })}
@@ -159,18 +162,18 @@ const LoginForm = () => {
               className={styles["submitButton"]}
               sx={{ marginTop: "1.25rem" }}
             >
-              Login
+              {t('logRegForm.login')}
             </Button>
             <Typography
               className={styles["switchText"]}
               sx={{ fontSize: "0.85rem", marginTop: "3rem" }}
             >
-              Don't have an account?{" "}
+              {t('logRegForm.noAccount')}{" "}
               <span
                 className={styles["signLink"]}
                 onClick={() => navigate("/register")}
               >
-                Sign up
+                {t('logRegForm.signUp')}
               </span>
             </Typography>
           </Box>
