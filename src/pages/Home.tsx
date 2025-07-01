@@ -9,7 +9,6 @@ interface HomeProps {
 const HomePage = ({ themeMode, toggleTheme } : HomeProps) => {
     return (
         <>
-            <Navbar themeMode={themeMode} toggleTheme={toggleTheme}/>
             <Exams />
         </>     
     );

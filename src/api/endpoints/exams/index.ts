@@ -28,7 +28,7 @@ export const examsApi = baseApi.injectEndpoints({
     }),
 
     archiveExam: builder.mutation<void, { id: string }>({
-      query: ({id}) => ({
+      query: ({ id }) => ({
         url: `exams/${id}/archive`,
         method: "PUT",
       }),
@@ -37,4 +37,9 @@ export const examsApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useGetExamsQuery, useAddExamMutation, useUpdateExamMutation, useArchiveExamMutation } = examsApi;
+export const {
+  useGetExamsQuery,
+  useAddExamMutation,
+  useUpdateExamMutation,
+  useArchiveExamMutation,
+} = examsApi;

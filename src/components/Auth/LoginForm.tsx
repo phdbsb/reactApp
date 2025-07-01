@@ -17,6 +17,9 @@ import { FetchError } from "@/models/error";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { toast } from "react-toastify";
 import { useTranslation } from "react-i18next";
+import { AppDispatch } from "@/store";
+import { setUser } from "@/store/features/authSlice";
+import { useDispatch } from "react-redux";
 
 
 const LoginForm = () => {
@@ -29,6 +32,7 @@ const LoginForm = () => {
   const navigate = useNavigate();
   const [loginError, setLoginError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const dispatch = useDispatch<AppDispatch>();
   const { t } = useTranslation();
 
   const onSubmit = async (data: ILogin) => {
@@ -41,6 +45,9 @@ const LoginForm = () => {
         toast.error("Login failed: " + errorData.data);
         return;
       }
+
+      dispatch(setUser(response.data));
+      
       toast.success(t("logRegText.login"));
       navigate("/");
     } catch (err) {

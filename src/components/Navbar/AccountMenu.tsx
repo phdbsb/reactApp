@@ -15,7 +15,9 @@ import { useLogoutMutation } from "@/api/endpoints/auth";
 import { useDispatch } from "react-redux";
 import { baseApi } from "@/api";
 import { useTranslation } from "react-i18next";
-
+import { AppDispatch, persistor } from "@/store";
+import { logoutUser } from "@/store/features/authSlice";
+import { useAuth } from "@/hooks/useAuth";
 
 const AccountMenu = () => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -23,7 +25,8 @@ const AccountMenu = () => {
   const navigate = useNavigate();
 
   const [logout] = useLogoutMutation();
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
+  const { isAdmin } = useAuth();
   const { t } = useTranslation();
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -36,7 +39,9 @@ const AccountMenu = () => {
   const handleLogout = async () => {
     try {
       await logout();
+      dispatch(logoutUser());
       dispatch(baseApi.util.resetApiState());
+      persistor.purge();
       navigate("/login");
     } catch (err) {
       console.error("Logout error: ", err);
@@ -74,7 +79,7 @@ const AccountMenu = () => {
               mt: 1.5,
               "& .MuiMenuItem-root": {
                 "&:hover": {
-                  backgroundColor: "var(--account-menu)"
+                  backgroundColor: "var(--account-menu)",
                 },
               },
               "& .MuiAvatar-root": {
@@ -102,29 +107,37 @@ const AccountMenu = () => {
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
         <MenuItem onClick={handleClose}>
-          <Avatar /> {t('accountMenu.profile')}
+          <Avatar /> {t("accountMenu.profile")}
         </MenuItem>
-        <MenuItem onClick={handleClose}>
-          <Avatar /> {t('accountMenu.myAccount')}
-        </MenuItem>
+        {isAdmin && (
+          <MenuItem onClick={() => navigate("/admin-dashboard")}>
+            <ListItemIcon>
+              <Avatar/>
+            </ListItemIcon>
+            Admin Dashboard
+          </MenuItem>
+        )}
+        {/* <MenuItem onClick={handleClose}>
+          <Avatar /> {t("accountMenu.myAccount")}
+        </MenuItem> */}
         <Divider />
         <MenuItem onClick={handleClose}>
           <ListItemIcon>
             <PersonAdd fontSize="small" />
           </ListItemIcon>
-          {t('accountMenu.addAnotherAccount')}
+          {t("accountMenu.addAnotherAccount")}
         </MenuItem>
         <MenuItem onClick={handleClose}>
           <ListItemIcon>
             <Settings fontSize="small" />
           </ListItemIcon>
-          {t('accountMenu.settings')}
+          {t("accountMenu.settings")}
         </MenuItem>
         <MenuItem onClick={handleLogout}>
           <ListItemIcon>
             <Logout fontSize="small" />
           </ListItemIcon>
-          {t('accountMenu.logout')}
+          {t("accountMenu.logout")}
         </MenuItem>
       </Menu>
     </React.Fragment>

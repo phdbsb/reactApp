@@ -3,15 +3,17 @@ import dayjs from "dayjs";
 import styles from './style.module.css';
 import { ExamCard } from "@/api/endpoints/exams/types";
 import { useTranslation } from "react-i18next";
+import { Dialog, DialogContent, DialogTitle } from "@mui/material";
 
 interface FormProps {
+    open: boolean;
     isEditMode: boolean;
     examToEdit?: ExamCard;
     onSave: (exam: ExamCard) => void;
     onClose: () => void;
 }
 
-const Form = ({ isEditMode, examToEdit, onSave, onClose }: FormProps) => {
+const Form = ({ open, isEditMode, examToEdit, onSave, onClose }: FormProps) => {
     const { t } = useTranslation();
 
     const initialFormData = {
@@ -36,16 +38,18 @@ const Form = ({ isEditMode, examToEdit, onSave, onClose }: FormProps) => {
         onSave(newExam);
     };
 
-    return (
-        <div className={styles["form-wrapper"]}>
-            <h2>{isEditMode ? t("form.editExam") : t("form.createExam")}</h2>
-            <FormManager
-                initialData={initialFormData}
-                onSave={handleSave}
-                onClose={onClose}
-                isEditMode={isEditMode}
-            />
-        </div>
+    return ( 
+        <Dialog open={open} onClose={onClose} maxWidth="sm">
+            <DialogTitle sx={{fontSize: '1.4rem', fontWeight: 600}}>{isEditMode ? t("form.editExam") : t("form.createExam")}</DialogTitle>
+            <DialogContent>
+                <FormManager
+                    initialData={initialFormData}
+                    onSave={handleSave}
+                    onClose={onClose}
+                    isEditMode={isEditMode}
+                />
+            </DialogContent>
+        </Dialog>
     );
 };
 

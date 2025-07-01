@@ -17,6 +17,9 @@ import { FetchError } from "@/models/error";
 import { motion } from "framer-motion";
 import { toast } from "react-toastify";
 import { useTranslation } from "react-i18next";
+import { AppDispatch } from "@/store";
+import { setUser } from "@/store/features/authSlice";
+import { useDispatch } from "react-redux";
 
 interface RegisterFormData extends IReg {
   confirmPassword: string;
@@ -34,6 +37,7 @@ const RegisterForm = () => {
   const [logError, setlogError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const dispatch = useDispatch<AppDispatch>();
   const { t } = useTranslation();
 
   const handleTogglePassword =
@@ -57,6 +61,9 @@ const RegisterForm = () => {
         toast.error("Registration failed: " + errorData.data);
         return;
       }
+
+      dispatch(setUser(response.data));
+
       toast.success(t("logRegText.register"));
       navigate("/");
     } catch (err) {
@@ -117,7 +124,11 @@ const RegisterForm = () => {
     <div className={styles["pageContainer"]}>
       <div className={styles["logRegCard"]}>
         <div className={styles["leftPane"]}>
-          <img src="/assets/register2.svg" alt="Register illustration" className={styles["loginImage"]} />
+          <img
+            src="/assets/register2.svg"
+            alt="Register illustration"
+            className={styles["loginImage"]}
+          />
         </div>
         <motion.div
           variants={formVariants}
@@ -132,7 +143,7 @@ const RegisterForm = () => {
             className={styles["formBox"]}
           >
             <Typography variant="h5" className={styles["formTitle"]}>
-              {t('logRegForm.createAccount')}
+              {t("logRegForm.createAccount")}
             </Typography>
             {registerFields.map((field) => (
               <TextField
@@ -165,13 +176,13 @@ const RegisterForm = () => {
                   ...(field.name === "email" && {
                     pattern: {
                       value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                      message: t('logRegForm.invalidEmail'),
+                      message: t("logRegForm.invalidEmail"),
                     },
                   }),
                   ...(field.name === "password" && {
                     minLength: {
                       value: 8,
-                      message: t('logRegForm.passwordMinLength'),
+                      message: t("logRegForm.passwordMinLength"),
                     },
                   }),
                 })}
@@ -218,18 +229,18 @@ const RegisterForm = () => {
               className={styles["submitButton"]}
               sx={{ marginTop: "1.25rem", fontSize: "0.8rem" }}
             >
-              {t('logRegForm.signUp')}
+              {t("logRegForm.signUp")}
             </Button>
             <Typography
               className={styles["switchText"]}
               sx={{ fontSize: "0.85rem", marginTop: "3rem" }}
             >
-              { t('logRegForm.haveAccount')}{" "}
+              {t("logRegForm.haveAccount")}{" "}
               <span
                 className={styles["signLink"]}
                 onClick={() => navigate("/login")}
               >
-                {t('logRegForm.signIn')}
+                {t("logRegForm.signIn")}
               </span>
             </Typography>
           </Box>

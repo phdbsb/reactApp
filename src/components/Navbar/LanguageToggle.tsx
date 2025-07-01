@@ -23,8 +23,16 @@ const LanguageToggle = () => {
         onChange={toggleLang}
       />
       <label htmlFor="language-toggle" className={styles.toggleLabel}></label>
-      <span className={`${styles.on} ${language === "en" ? styles.active : ""}`}>EN</span>
-      <span className={`${styles.off} ${language === "sr" ? styles.active : ""}`}>SR</span>
+      <span
+        className={`${styles.on} ${language === "en" ? styles.active : ""}`}
+      >
+        EN
+      </span>
+      <span
+        className={`${styles.off} ${language === "sr" ? styles.active : ""}`}
+      >
+        SR
+      </span>
     </div>
   );
 };

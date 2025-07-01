@@ -9,6 +9,7 @@ import { useState } from "react";
 import { TbEditCircle } from "react-icons/tb";
 import ContextMenu from "../ContextMenu/ContextMenu";
 import { useTranslation } from "react-i18next";
+import { useAuth } from "@/hooks/useAuth";
 
 interface ExamCardProps {
   exam: IGetExams;
@@ -27,6 +28,7 @@ const Exam = ({
 }: ExamCardProps) => {
   const [updatePassedStatus] = useUpdatePassedStatusMutation();
   const [showMenu, setShowMenu] = useState(false);
+  const { isStudent, isProfessor } = useAuth();
 
   const currentSemester = getCurrentSemester();
   const canReport =
@@ -52,45 +54,52 @@ const Exam = ({
         passedStatus ? styles["passed"] : ""
       }`}
     >
-      <div
-        className={`${styles["icon-wrapper"]} ${
-          showMenu ? styles["icon-visible"] : ""
-        }`}
-      >
-        <TbEditCircle
-          className={styles["edit-icon"]}
-          onClick={(e) => {
-            setShowMenu(!showMenu);
-            e.stopPropagation();
-          }}
-        />
-        {showMenu && (
-          <ContextMenu
-            onEdit={() => onEditClick(exam)}
-            onDelete={() => onDeleteClick(exam)}
-            onClose={() => setShowMenu(false)}
+      {isProfessor && (
+        <div
+          className={`${styles["icon-wrapper"]} ${
+            showMenu ? styles["icon-visible"] : ""
+          }`}
+        >
+          <TbEditCircle
+            className={styles["edit-icon"]}
+            onClick={(e) => {
+              setShowMenu(!showMenu);
+              e.stopPropagation();
+            }}
           />
-        )}
-      </div>
+          {showMenu && (
+            <ContextMenu
+              onEdit={() => onEditClick(exam)}
+              onDelete={() => onDeleteClick(exam)}
+              onClose={() => setShowMenu(false)}
+            />
+          )}
+        </div>
+      )}
       <div className={styles["exam-header"]}>
         <h3 className={styles["exam-title"]}>{exam.title}</h3>
-        <button
-          className={styles["apply-button"]}
-          disabled={
-            !canReport || (exam.isRegistered && (!!timeLeft || !!passedStatus))
-          }
-          onClick={() => onReportClick(exam)}
-        >
-          {t("exam.report")}
-        </button>
+        {isStudent && (
+          <button
+            className={styles["apply-button"]}
+            disabled={
+              !canReport ||
+              (exam.isRegistered && (!!timeLeft || !!passedStatus))
+            }
+            onClick={() => onReportClick(exam)}
+          >
+            {t("exam.report")}
+          </button>
+        )}
       </div>
       <div className={styles["exam-footer"]}>
         <span className={styles["exam-faculty"]}>{t("faculty")}</span>
-        {exam.isRegistered && (
+        {isStudent && exam.isRegistered && (
           <>
             {timeLeft !== "" ? (
               <span className={styles["exam-time"]}>
-                {timeLeft ? t("exam.startsIn", {time: timeLeft}) : t("exam.noStartTime")}
+                {timeLeft
+                  ? t("exam.startsIn", { time: timeLeft })
+                  : t("exam.noStartTime")}
               </span>
             ) : (
               <span

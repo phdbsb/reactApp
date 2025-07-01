@@ -18,6 +18,7 @@ import {
 } from "@/api/endpoints/registrations";
 import ConfirmDialog from "../ConfirmDialog/ConfirmDialog";
 import { useTranslation } from "react-i18next";
+import { useAuth } from "@/hooks/useAuth";
 
 const Exams = () => {
   const { data: exams } = useGetExamsQuery();
@@ -26,6 +27,7 @@ const Exams = () => {
   const [updateExam] = useUpdateExamMutation();
   const [registerExam] = useRegisterExamMutation();
   const [archiveExam] = useArchiveExamMutation();
+  const { isStudent, isProfessor } = useAuth();
   const { t } = useTranslation();
 
   const [formState, setFormState] = useState({
@@ -174,11 +176,16 @@ const Exams = () => {
         <div className={styles["exams-wrapper"]}>
           <div className={styles["nav-exams"]}>
             <h1 className={styles["exams-title"]}>{t("exam.title")}</h1>
-            <button className={styles["create-button"]} onClick={onCreateClick}>
-              {" "}
-              <img src="assets/add.svg" width="22px" alt="" />
-              {t("exam.create")}{" "}
-            </button>
+            {isProfessor && (
+              <button
+                className={styles["create-button"]}
+                onClick={onCreateClick}
+              >
+                {" "}
+                <img src="assets/add.svg" width="22px" alt="" />
+                {t("exam.create")}{" "}
+              </button>
+            )}
           </div>
           <div className={styles["exams-container"]}>
             {notPassedExams?.map((exam, index) => (
@@ -192,11 +199,7 @@ const Exams = () => {
               />
             ))}
           </div>
-          <h2 className={styles["passed-title"]}>
-            {(mappedPassedExams?.length ?? 0) > 0
-              ? t("exam.passedExams")
-              : t("exam.noPassedExams")}
-          </h2>
+          <h2 className={styles["passed-title"]}>{t("exam.history")}</h2>
           <div className={styles["passed-exams-container"]}>
             {mappedPassedExams?.map((exam, index) => (
               <Exam
@@ -211,16 +214,15 @@ const Exams = () => {
           </div>
         </div>
       </div>
-      {formState.showForm && (
-        <div className={styles["form-container"]}>
-          <Form
-            isEditMode={formState.isEditMode}
-            examToEdit={examToEdit}
-            onSave={handleSave}
-            onClose={handleCloseForm}
-          />
-        </div>
-      )}
+      <div className={styles["form-container"]}>
+        <Form
+          open={formState.showForm}
+          isEditMode={formState.isEditMode}
+          examToEdit={examToEdit}
+          onSave={handleSave}
+          onClose={handleCloseForm}
+        />
+      </div>
       {selectedExam && (
         <Popup
           exam={selectedExam}

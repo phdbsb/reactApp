@@ -6,6 +6,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { useEffect, useState } from "react";
 import styles from './style.module.css';
 import { useTranslation } from "react-i18next";
+import { Button, DialogActions } from "@mui/material";
 
 interface FormData {
     title: string;
@@ -98,7 +99,7 @@ const FormManager = ({ initialData, onSave, onClose, isEditMode }: FormManagerPr
                     {errors[name as keyof FormData] && <span>{errors[name as keyof FormData]?.message}</span>}
                 </div>
             ))}
-            <div className={styles["form-buttons"]}>
+           <div className={styles["form-buttons"]}>
                 <button type="button" className={styles["close-button"]} onClick={onClose}>{t("form.close")}</button>
                 <button type="submit" className={styles["save-button"]}>{isEditMode ? t("form.save") : t("form.create")}</button>
             </div>

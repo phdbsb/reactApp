@@ -1,3 +1,4 @@
+import { logoutUser } from "@/store/features/authSlice";
 import {
   BaseQueryFn,
   createApi,
@@ -20,6 +21,7 @@ const middleware401: BaseQueryFn<
   const result = await baseQuery(args, api, extraOptions);
 
   if (result.error?.status === 401) {
+    api.dispatch(logoutUser());
     window.location.href = "/login";
   }
 
@@ -28,7 +30,7 @@ const middleware401: BaseQueryFn<
 
 export const baseApi = createApi({
   reducerPath: "examApi",
-  tagTypes: ["Exams", "Registrations", "Deadlines", "PassedStatus"],
+  tagTypes: ["Exams", "Registrations", "Deadlines", "PassedStatus", "Users"],
   baseQuery: middleware401,
   endpoints: () => ({}),
 });

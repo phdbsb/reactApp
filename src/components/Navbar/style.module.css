@@ -1,15 +1,26 @@
 .navbar-container {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
 }
 
-.icons-container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+.left-side {
+  display: flex;
+  align-items: center;
 }
+
+.right-side {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* .icons-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+} */
 
 .switch {
   position: relative;
@@ -25,7 +36,7 @@
   position: absolute;
   top: 8px;
   pointer-events: none;
-  font-family: 'Helvetica', Arial, sans-serif;
+  font-family: "Helvetica", Arial, sans-serif;
   font-weight: bold;
   font-size: 10px;
   text-transform: uppercase;
@@ -47,7 +58,7 @@
 }
 
 .active {
-  color: #bdbdbd; 
+  color: #bdbdbd;
 }
 
 .toggleCheckbox {
@@ -83,4 +94,11 @@
 .toggleCheckbox:checked + .toggleLabel::before {
   margin-left: 34px;
   margin-right: 34px;
+}
+
+.backButton {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
 }

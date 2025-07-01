@@ -1,3 +1,9 @@
+export enum UserRole {
+    Student = "Student",
+    Professor = "Professor",
+    Admin = "Admin"
+};
+
 export interface IReg {
     firstName: string,
     lastName: string,
@@ -11,5 +17,5 @@ export interface ILogin {
 }
 
 type IRegWithoutPassword = Omit<IReg, "password">
-export type IAuthResponse = IRegWithoutPassword & { id: string }
+export type IAuthResponse = IRegWithoutPassword & { userId: string, role: UserRole }
 
