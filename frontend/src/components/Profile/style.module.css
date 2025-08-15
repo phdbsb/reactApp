@@ -1,0 +1,80 @@
+.profile-settings {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  max-width: 600px;
+  margin: 50px auto 0 auto;
+  padding: 0 16px;
+}
+
+.divider {
+  width: 100%;
+  margin: 32px 0;
+  border-color: #ddd;
+}
+
+.profile-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 32px;
+}
+
+.profile-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  width: 100%;
+}
+
+.profile-fullName {
+  display: flex;
+  gap: 16px;
+  width: 100%;
+  margin-bottom: 32px;
+}
+
+.profile-email-status {
+  width: 292px;
+  margin-bottom: 32px;
+}
+
+.button-save {
+  font-family: Arial, Helvetica, sans-serif;
+  padding: 8px 16px;
+  font-size: 14px;
+  background-color: var(--primary-color);
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.button-save:hover {
+  background-color: var(--primary-color-hover);
+}
+
+.button-delete {
+  background-color: var(--close-button);
+  color: var(--label);
+  border: 1px solid var(--disabled);
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.button-delete:hover {
+  background-color: var(--close-button-hover);
+}
+
+.button-save:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.button-delete:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

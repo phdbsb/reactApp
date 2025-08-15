@@ -1,0 +1,79 @@
+{
+  "faculty": "Elektronski fakultet",
+  "exam": {
+    "report": "Prijavi ispit",
+    "passed": "Polozio",
+    "notPassed": "Nisam položio",
+    "startsIn": "Počinje za {{time}}",
+    "noStartTime": "Nema vreme početka",
+    "title": "Moji ispiti",
+    "create": "Kreiraj",
+    "history": "Istorija"
+  },
+  "dialog": {
+    "deleteExamTitle": "Obriši ispit",
+    "deletePictureTitle": "Obrisi profilnu sliku",
+    "deleteExamMessage": "Da li ste sigurni da želite da obrišete ovaj ispit?",
+    "deletePicture": "Da li ste sigurni da želite da obrišete profilnu sliku?",
+    "cancel": "Otkaži",
+    "confirm": "Potvrdi"
+  },
+  "menu": {
+    "edit": "Izmeni",
+    "remove": "Ukloni"
+  },
+  "form": {
+    "createExam": "Napravi ispit",
+    "editExam": "Izmeni ispit",
+    "title": "Naziv",
+    "semester": "Semestar",
+    "semester1": "Semestar 1",
+    "semester2": "Semestar 2",
+    "januaryDeadline": "Januarski rok:",
+    "marchDeadline": "Martovski rok:",
+    "augustDeadline": "Avgustovski rok:",
+    "requiredField": "Ovo polje je obavezno",
+    "close": "Zatvori",
+    "save": "Sacuvaj",
+    "create": "Kreiraj"
+  },
+  "accountMenu": {
+    "profile": "Profil",
+    "myAccount": "Moj nalog",
+    "addAnotherAccount": "Dodaj još jedan nalog",
+    "settings": "Podešavanja",
+    "logout": "Odjavi se"
+  },
+  "deadline": {
+    "chooseDeadline": "Izaberite rok"
+  },
+  "logRegForm": {
+    "welcomeBack": "Dobrodošao nazad",
+    "email": "E-pošta",
+    "password": "Lozinka",
+    "invalidEmail": "Nevažeći format e-pošte",
+    "passwordMinLength": "Lozinka mora imati najmanje 8 karaktera",
+    "requiredEmail": "E-pošta je obavezna",
+    "requiredPassword": "Lozinka je obavezna",
+    "login": "Prijavi se",
+    "noAccount": "Nemate nalog?",
+    "haveAccount": "Već imate nalog?",
+    "signUp": "Registruj se",
+    "signIn": "Prijavi se",
+    "createAccount": "Kreiraj nalog",
+    "confirmPassword": "Potvrdi lozinku",
+    "firstName": "Ime",
+    "lastName": "Prezime"
+  },
+  "logRegText": {
+    "login": "Prijava je uspešna!",
+    "register": "Registracija je uspešna!"
+  },
+  "table": {
+    "name": "Ime",
+    "email": "E-pošta",
+    "role": "Uloga",
+    "title": "Admin Panel"
+  }
+
+}
