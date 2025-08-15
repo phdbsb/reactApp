@@ -1,0 +1,108 @@
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup-content {
+    background: var(--background-primary);
+    font-family: arial;
+    width: 400px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    position: relative;
+    padding: 1.25rem;
+}
+
+.popup-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 1.25rem;
+}
+
+.popup-header h2 {
+    margin: 0;
+    font-size: 1.125rem;
+}
+
+.close-button {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--label);
+    padding: 0;
+}
+
+.popup-body {
+    margin-bottom: 1.25rem;
+    min-height: 100px;
+}
+
+.term-options {
+    margin-top: 0.625rem;
+}
+
+.term-option {
+    display: flex;
+    align-items: center;
+    margin: 0.313rem 0;
+}
+
+.term-label {
+    display: flex;
+    align-items: center;
+    font-size: 1rem;
+    gap: 10px;
+}
+
+.term-option input {
+    margin: 0;
+    transform: scale(1.2);
+    cursor: pointer;
+}
+
+.term-text.disabled-text {
+    color: var(--disabled-popup);
+    text-decoration: line-through;
+}
+
+.popup-footer {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.save-button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 0.313rem 0.938rem;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.cancel-button {
+    background-color: var(--close-button); 
+    padding: 0.313rem 0.938rem;
+    border-radius: 4px;
+    border: 1px solid var(--disabled);
+    cursor: pointer;
+    color: var(--label);
+}
+
+.save-button:hover {
+    background-color: var(--primary-color-hover);
+}
+
+.cancel-button:hover {
+    background-color: var(--close-button-hover);
+}

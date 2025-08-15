@@ -1,0 +1,75 @@
+.admin-dashboard {
+  display: flex;
+  height: calc(100vh - 64px);
+  padding: 2;
+  justify-content: center;
+  align-items: center;
+}
+
+.inner-dashboard {
+  width: 80%;
+  max-width: 62.5rem;
+  height: 83%;
+  display: flex;
+  flex-direction: column;
+}
+
+.table-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 7px;
+}
+
+.button-group {
+  display: flex;
+  gap: 10px;
+}
+
+.button-save {
+  padding: 8px 16px;
+  font-size: 14px;
+  background-color: var(--primary-color);
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.button-save:hover {
+  background-color: var(--primary-color-hover);
+}
+
+.edited-row {
+  background-color: rgba(33, 136, 163, 0.08);
+}
+
+.button-save:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.button-cancel {
+  background-color: var(--close-button);
+  color: var(--label);
+  border: 1px solid var(--disabled);
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.button-cancel:hover {
+  background-color: var(--close-button-hover);
+}
+
+.button-cancel:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.userName {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
