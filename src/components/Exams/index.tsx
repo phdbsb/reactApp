@@ -1,1 +1,0 @@
-export { default as Exam } from './Exams';

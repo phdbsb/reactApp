@@ -1,0 +1,41 @@
+# Build and project files
+bin/
+obj/
+.vs/
+*.user
+*.suo
+*.cache
+
+# NuGet packages
+.nuget/
+packages/
+*.nupkg
+
+# Output files
+out/
+publish/
+
+# Logs and diagnostics
+*.log
+*.sql
+*.bak
+
+# IDE files
+.idea/
+.vscode/
+*.code-workspace
+
+# Database files (PostgreSQL)
+*.psql
+pgdata/
+postgres-data/
+
+# Local development files
+appsettings.Development.json
+local.settings.json
+launchSettings.json
+
+# Misc
+.DS_Store
+*.swp
+*.swo

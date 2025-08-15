@@ -1,8 +1,0 @@
-* {
-  transition: background-color 500ms ease-out 0.1s;
-}
-
-body {
-  background-color: var(--background-primary);
-  color: var(--text-primary);
-}
