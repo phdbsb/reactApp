@@ -69,6 +69,16 @@
     "login": "Login successful!",
     "register": "Registration successful!"
   },
+  "profile": {
+    "title": "Profile",
+    "delete_button": "Delete picture",
+    "upload_button": "Upload new picture",
+    "name": "Full name",
+    "email": "Email",
+    "status": "Status",
+    "firstName": "First Name",
+    "lastName": "Last Name"
+  },
   "table": {
     "name": "Name",
     "email": "Email",

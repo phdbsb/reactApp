@@ -69,11 +69,20 @@
     "login": "Prijava je uspešna!",
     "register": "Registracija je uspešna!"
   },
+  "profile": {
+    "title": "Profil",
+    "delete_button": "Obriši sliku",
+    "upload_button": "Postavi novu sliku",
+    "name": "Puno ime",
+    "email": "E-pošta",
+    "status": "Status",
+    "firstName": "Ime",
+    "lastName": "Prezime"
+  },
   "table": {
     "name": "Ime",
     "email": "E-pošta",
     "role": "Uloga",
     "title": "Admin Panel"
   }
-
 }

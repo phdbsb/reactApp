@@ -21,6 +21,7 @@ import ConfirmDialog from "../ConfirmDialog/ConfirmDialog";
 import { t } from "i18next";
 import { useUpdateUserInfoMutation } from "@/api/endpoints/user";
 import UserImage from "../UserImage/UserImage";
+import { useTranslation } from "react-i18next";
 
 const ProfileSettings = () => {
   const { user } = useAuth();
@@ -28,6 +29,7 @@ const ProfileSettings = () => {
 
   const [uploadProfileImage] = useUploadProfileImageMutation();
   const [deleteProfileImage] = useDeleteProfileImageMutation();
+  const { t } = useTranslation();
 
   console.log(user?.imagePath);
 
@@ -112,7 +114,7 @@ const ProfileSettings = () => {
   return (
     <div className={styles["profile-settings"]}>
       <Typography variant="h4" gutterBottom>
-        Profile Settings
+        {t("profile.title")}
       </Typography>
 
       <Divider sx={{ width: "100%", mb: 4 }} />
@@ -128,7 +130,7 @@ const ProfileSettings = () => {
             onClick={() => setConfirmDialog(true)}
             disabled={!user?.imagePath}
           >
-            Delete picture
+            {t("profile.delete_button")}
           </button>
 
           <label htmlFor="upload-photo">
@@ -140,7 +142,7 @@ const ProfileSettings = () => {
               onChange={handleFileChange}
               ref={fileInputRef}
             />
-            <div className={styles["button-save"]}>Upload new picture</div>
+            <div className={styles["button-save"]}>{t("profile.upload_button")}</div>
           </label>
         </div>
       </div>
@@ -151,18 +153,18 @@ const ProfileSettings = () => {
         gutterBottom
         sx={{ marginBottom: 3 }}
       >
-        Full Name
+        {t("profile.name")}
       </Typography>
       <div className={styles["profile-fullName"]}>
         <TextField
-          label="First Name"
+          label={t("profile.firstName")}
           fullWidth
           value={firstName}
           onChange={(e) => setFirstName(e.target.value)}
           slotProps={{ input: { sx: { fontSize: "15px", height: "45px" } } }}
         />
         <TextField
-          label="Last Name"
+          label={t("profile.lastName")}
           fullWidth
           value={lastName}
           onChange={(e) => setLastName(e.target.value)}
@@ -173,7 +175,7 @@ const ProfileSettings = () => {
       <Divider sx={{ width: "100%", mb: 4 }} />
 
       <Typography variant="h6" alignSelf="flex-start" gutterBottom>
-        Email
+        {t("profile.email")}
       </Typography>
       <div className={styles["profile-email-status"]}>
         <TextField
@@ -187,7 +189,7 @@ const ProfileSettings = () => {
       <Divider sx={{ width: "100%", mb: 4 }} />
 
       <Typography variant="h6" alignSelf="flex-start" gutterBottom>
-        Status
+        {t("profile.status")}
       </Typography>
       <div className={styles["profile-email-status"]}>
         <TextField
@@ -206,14 +208,14 @@ const ProfileSettings = () => {
           onClick={handleCancel}
           disabled={!isChanged}
         >
-          Cancel
+          {t("dialog.cancel")}
         </button>
         <button
           className={styles["button-save"]}
           onClick={handleSave}
           disabled={!isChanged}
         >
-          Save
+          {t("form.save")}
         </button>
       </div>
 
