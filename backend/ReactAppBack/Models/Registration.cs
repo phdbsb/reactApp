@@ -12,6 +12,9 @@ namespace Models
         [Required]
         public bool Passed { get; set; }
         
+        [Range(5, 10)]
+        public int? Grade { get; set; }
+        
         public User User { get; set; }
         public Exam Exam { get; set; }
         public Deadline Deadline { get; set; }

@@ -10,6 +10,7 @@ namespace ReactAppBack.Services
     {
         Task<List<UserDisplayDto>> GetAllUsers(Guid userId);
         Task<List<ImageRequestDto>> GetAllUsersIdImage();
+        Task<List<StudentRegistrationDto>> GetStudentsByExam(Guid examId);
         Task UpdateUsersRoles(Dictionary<Guid, string> userRoles);
         Task<RegLogUser> UpdateUserInfo(Guid userId, UserInfoUpdateDto userInfo);
     }
@@ -53,6 +54,19 @@ namespace ReactAppBack.Services
                 }).ToListAsync();
         }
 
+        public async Task<List<StudentRegistrationDto>> GetStudentsByExam(Guid examId)
+        {
+            return await _context.Registrations
+                .Where(r => r.Exam.ID == examId)
+                .Select(r => new StudentRegistrationDto
+                {
+                    UserId = r.User.ID,
+                    FirstName = r.User.FirstName,
+                    LastName = r.User.LastName,
+                    Grade = r.Grade
+                }).ToListAsync();
+        }
+        
         public async Task UpdateUsersRoles(Dictionary<Guid, string> userRoles)
         {
             var userIds = userRoles.Keys.ToList();
@@ -75,6 +89,7 @@ namespace ReactAppBack.Services
             await _context.SaveChangesAsync();
         }
 
+        
         public async Task<RegLogUser> UpdateUserInfo(Guid userId, UserInfoUpdateDto userInfo)
         {
             var user = await _context.Users.FirstOrDefaultAsync(u => u.ID == userId);

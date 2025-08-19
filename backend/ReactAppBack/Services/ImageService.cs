@@ -34,7 +34,7 @@ namespace ReactAppBack.Services
             var fullPath = Path.Combine(Directory.GetCurrentDirectory(), imagePath.TrimStart('/').Replace('/', Path.DirectorySeparatorChar));
             if (!System.IO.File.Exists(fullPath))
                 return null;
-        
+                
             var provider = new FileExtensionContentTypeProvider();
             if (!provider.TryGetContentType(fullPath, out var contentType))
             {
