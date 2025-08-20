@@ -15,6 +15,7 @@ import { Navbar } from "./components/Navbar";
 import RequireAdmin from "./components/Guards/RequireAdmin";
 import Unauthorized from "./components/AccessControl/Unauthorized";
 import ProfileSettings from "./components/Profile/ProfileSettings";
+import ProfessorDashboard from "./components/Dashboard/ProfessorDashboard";
 
 const App = () => {
   const { themeMode, toggleTheme } = useThemeMode();
@@ -51,6 +52,7 @@ const App = () => {
               </RequireAdmin>
             }
           />
+          <Route path="/professor-dashboard" element={<ProfessorDashboard />} />
           <Route path="/profile" element={<ProfileSettings />} />
           <Route path="/unauthorized" element={<Unauthorized />} />
           {/* <Route path="*" element={}/> */}

@@ -10,6 +10,7 @@ import { TbEditCircle } from "react-icons/tb";
 import ContextMenu from "../ContextMenu/ContextMenu";
 import { useTranslation } from "react-i18next";
 import { useAuth } from "@/hooks/useAuth";
+import { useNavigate } from "react-router";
 
 interface ExamCardProps {
   exam: IGetExams;
@@ -35,6 +36,8 @@ const Exam = ({
     currentSemester === 2 || (currentSemester === 1 && exam.semester === 1);
 
   const { data: passedStatus } = useGetPassedStatusQuery({ examId: exam.id });
+
+  const navigate = useNavigate();
   const { t } = useTranslation();
 
   const onPassClick = async (exam: ExamCard) => {
@@ -53,6 +56,11 @@ const Exam = ({
       className={`${styles["exam-card"]} ${
         passedStatus ? styles["passed"] : ""
       }`}
+      onClick={() => {
+        if (isProfessor) {
+          navigate("/professor-dashboard");
+        }
+      }}
     >
       {isProfessor && (
         <div

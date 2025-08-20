@@ -17,6 +17,7 @@ import styles from "./style.module.css";
 import { UserRole } from "@/api/endpoints/auth/types";
 import { useGetImagesQuery } from "@/api/endpoints/images";
 import { useTranslation } from "react-i18next";
+import GenericTable from "../GenericTable/GenericTable";
 
 const AdminDashboard = () => {
   const { data: users = [], isLoading } = useGetAllusersQuery();
@@ -117,55 +118,16 @@ const AdminDashboard = () => {
   ];
 
   return (
-    <div className={styles["admin-dashboard"]}>
-      <div className={styles["inner-dashboard"]}>
-        <div className={styles["table-header"]}>
-          <Typography variant="h4">{t("table.title")}</Typography>
-          <div className={styles["button-group"]}>
-            <button
-              onClick={handleCancel}
-              className={styles["button-cancel"]}
-              disabled={selectedRows.size === 0}
-            >
-              {t("dialog.cancel")}
-            </button>
-            <button
-              onClick={handleSave}
-              className={styles["button-save"]}
-              disabled={selectedRows.size === 0}
-            >
-              {t("form.save")}
-            </button>
-          </div>
-        </div>
-        <DataGrid
-          rows={users}
-          columns={columns}
-          getRowId={(row) => row.userId}
-          loading={isLoading}
-          disableRowSelectionOnClick
-          sx={{
-            "& .MuiDataGrid-columnHeader": {
-              backgroundColor: "var(--background-primary)",
-            },
-            backgroundColor: "var(--background-primary)",
-            "& .MuiDataGrid-row:hover": {
-              backgroundColor: "var(--table-row-hover)",
-            },
-          }}
-          getRowClassName={(params) =>
-            selectedRows.has(params.row.userId) ? styles["edited-row"] : ""
-          }
-          initialState={{
-            pagination: {
-              paginationModel: { pageSize: 10, page: 0 },
-            },
-          }}
-          pageSizeOptions={[5, 10, 15]}
-          showToolbar
-        />
-      </div>
-    </div>
+    <GenericTable
+      title={t("table.title")}
+      rows={users}
+      columns={columns}
+      getRowId={(row) => row.userId}
+      loading={isLoading}
+      onSave={handleSave}
+      onCancel={handleCancel}
+      disableAction={selectedRows.size === 0}
+    />
   );
 };
 
