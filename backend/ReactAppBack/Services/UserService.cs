@@ -88,7 +88,6 @@ namespace ReactAppBack.Services
             }
             await _context.SaveChangesAsync();
         }
-
         
         public async Task<RegLogUser> UpdateUserInfo(Guid userId, UserInfoUpdateDto userInfo)
         {

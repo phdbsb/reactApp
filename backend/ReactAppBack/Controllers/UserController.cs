@@ -42,7 +42,7 @@ namespace ReactAppBack.Controllers
         }
 
         [HttpGet("registrations/{examId}")]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Professor")]
         public async Task<IActionResult> GetStudentsByExam(Guid examId)
         {
             var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
