@@ -58,7 +58,7 @@ const Exam = ({
       }`}
       onClick={() => {
         if (isProfessor) {
-          navigate("/professor-dashboard");
+          navigate(`/professor-dashboard/${exam.id}`);
         }
       }}
     >

@@ -52,7 +52,7 @@ const App = () => {
               </RequireAdmin>
             }
           />
-          <Route path="/professor-dashboard" element={<ProfessorDashboard />} />
+          <Route path="/professor-dashboard/:examId" element={<ProfessorDashboard />} />
           <Route path="/profile" element={<ProfileSettings />} />
           <Route path="/unauthorized" element={<Unauthorized />} />
           {/* <Route path="*" element={}/> */}

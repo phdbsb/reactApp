@@ -20,7 +20,7 @@ import { useTranslation } from "react-i18next";
 import GenericTable from "../GenericTable/GenericTable";
 
 const AdminDashboard = () => {
-  const { data: users = [], isLoading } = useGetAllusersQuery();
+  const { data: users = [] } = useGetAllusersQuery();
   const [updateRole] = useUpdateUserRoleMutation();
 
   const { t } = useTranslation();
@@ -123,10 +123,12 @@ const AdminDashboard = () => {
       rows={users}
       columns={columns}
       getRowId={(row) => row.userId}
-      loading={isLoading}
       onSave={handleSave}
       onCancel={handleCancel}
       disableAction={selectedRows.size === 0}
+      getRowClassName={(params) =>
+        selectedRows.has(params.row.userId) ? styles["edited-row"] : ""
+      }
     />
   );
 };

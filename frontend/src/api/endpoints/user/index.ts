@@ -1,5 +1,5 @@
 import { baseApi } from "@/api";
-import { UserDisplay, UserIdImage, UserInfoUpdate, UserRoleUpdate } from "./types";
+import { StudentRegistration, UserDisplay, UserIdImage, UserInfoUpdate, UserRoleUpdate } from "./types";
 import { IAuthResponse } from "../auth/types";
 
 export const userApi = baseApi.injectEndpoints({
@@ -12,6 +12,11 @@ export const userApi = baseApi.injectEndpoints({
     getUsersIdImage: builder.query<UserIdImage[], void>({
       query: () => "users/id-images",
       providesTags: ["ProfileImages", "UserIdImg"],
+    }),
+
+    getStudentsByRegistration: builder.query<StudentRegistration[], string>({
+      query: (examId) => `users/registrations/${examId}`,
+      providesTags: ["Registrations"]
     }),
 
     updateUserRole: builder.mutation<void, UserRoleUpdate>({
@@ -37,6 +42,7 @@ export const userApi = baseApi.injectEndpoints({
 export const {
   useGetAllusersQuery,
   useGetUsersIdImageQuery,
+  useGetStudentsByRegistrationQuery,
   useUpdateUserRoleMutation,
   useUpdateUserInfoMutation
 } = userApi;

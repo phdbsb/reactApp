@@ -1,60 +1,59 @@
-import { DataGrid, GridColDef } from "@mui/x-data-grid";
-import { T } from "react-router/dist/development/fog-of-war-BLArG-qZ";
+import {
+  DataGrid,
+  GridColDef,
+  GridRowClassNameParams,
+  GridValidRowModel,
+} from "@mui/x-data-grid";
 import styles from "./style.module.css";
 import { Typography } from "@mui/material";
-import { useTranslation } from "react-i18next";
 
-interface GenericTableProps<T> {
+interface GenericTableProps<T extends GridValidRowModel> {
   title: string;
   rows: T[];
   columns: GridColDef[];
   getRowId: (row: T) => string;
-  loading?: boolean;
 
   onSave?: () => void;
   onCancel?: () => void;
   disableAction?: boolean;
+  getRowClassName?: (params: GridRowClassNameParams<T>) => string;
 }
 
-const GenericTable = <T,>({
+const GenericTable = <T extends GridValidRowModel>({
   title,
   rows,
   columns,
   getRowId,
-  loading,
   onSave,
   onCancel,
   disableAction,
+  getRowClassName,
 }: GenericTableProps<T>) => {
-  const { t } = useTranslation();
-
   return (
     <div className={styles["dashboard"]}>
       <div className={styles["inner-dashboard"]}>
         <div className={styles["table-header"]}>
           <Typography variant="h4">{title}</Typography>
-          {(onSave || onCancel) && (
-            <div className={styles["button-group"]}>
-              {onCancel && (
-                <button
-                  onClick={onCancel}
-                  className={styles["button-cancel"]}
-                  disabled={disableAction}
-                >
-                  Cancel
-                </button>
-              )}
-              {onSave && (
-                <button
-                  onClick={onSave}
-                  className={styles["button-save"]}
-                  disabled={disableAction}
-                >
-                  Save
-                </button>
-              )}
-            </div>
-          )}
+          <div className={styles["button-group"]}>
+            {onCancel && (
+              <button
+                onClick={onCancel}
+                className={styles["button-cancel"]}
+                disabled={disableAction}
+              >
+                Cancel
+              </button>
+            )}
+            {onSave && (
+              <button
+                onClick={onSave}
+                className={styles["button-save"]}
+                disabled={disableAction}
+              >
+                Save
+              </button>
+            )}
+          </div>
         </div>
 
         <DataGrid
@@ -62,6 +61,7 @@ const GenericTable = <T,>({
           columns={columns}
           getRowId={getRowId}
           disableRowSelectionOnClick
+          getRowClassName={getRowClassName}
           sx={{
             "& .MuiDataGrid-columnHeader": {
               backgroundColor: "var(--background-primary)",

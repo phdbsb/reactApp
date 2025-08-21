@@ -18,7 +18,7 @@ const Navbar = ({ themeMode, toggleTheme }: themeProps) => {
     return null;
   }
 
-  const routesWithBackButton = ["/admin-dashboard", "/profile"];
+  const routesWithBackButton = ["/admin-dashboard", "/profile", "/professor-dashboard"];
 
   const showBackButton = routesWithBackButton.includes(location.pathname);
 
