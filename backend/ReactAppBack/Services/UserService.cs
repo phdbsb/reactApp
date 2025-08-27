@@ -63,7 +63,9 @@ namespace ReactAppBack.Services
                     UserId = r.User.ID,
                     FirstName = r.User.FirstName,
                     LastName = r.User.LastName,
-                    Grade = r.Grade
+                    Email = r.User.Email,
+                    Grade = r.Grade,
+                    ImagePath = r.User.ImagePath
                 }).ToListAsync();
         }
         
