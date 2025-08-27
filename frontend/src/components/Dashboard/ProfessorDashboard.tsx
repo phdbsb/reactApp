@@ -19,9 +19,19 @@ const ProfessorDashboard = () => {
       },
     },
     {
+      field: "email",
+      headerName: "Email",
+      width: 300,
+      renderCell: (params: GridRenderCellParams) => {
+        const student = params.row as StudentRegistration;
+        return <div>{student.email}</div>;
+      },
+    },
+    {
       field: "grade",
       headerName: "Grade",
       width: 200,
+      flex: 1,
       renderCell: (params: GridRenderCellParams) => {
         const student = params.row as StudentRegistration;
         return <div>{student.grade ?? ""}</div>;

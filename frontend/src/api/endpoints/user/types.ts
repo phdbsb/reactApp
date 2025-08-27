@@ -12,5 +12,6 @@ export interface StudentRegistration {
   userId: string;
   firstName: string;
   lastName: string;
+  email: string;
   grade: number | null;
 }
