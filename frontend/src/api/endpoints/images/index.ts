@@ -20,7 +20,7 @@ export const imageApi = baseApi.injectEndpoints({
         responseHandler: async (response) => {
           const data: UserData64[] = await response.json();
           return data.map((item) => {
-            const byteChars = atob(item.imageData);
+            const byteChars = atob(item.imagePath);
             const byteNums = new Array(byteChars.length)
               .fill(0)
               .map((_, i) => byteChars.charCodeAt(i));

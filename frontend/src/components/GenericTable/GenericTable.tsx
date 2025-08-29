@@ -70,6 +70,10 @@ const GenericTable = <T extends GridValidRowModel>({
             "& .MuiDataGrid-row:hover": {
               backgroundColor: "var(--table-row-hover)",
             },
+            "& .MuiDataGrid-cell:focus-within": {
+              outline: "none",
+              backgroundColor: "inherit",
+            },
           }}
           initialState={{
             pagination: {

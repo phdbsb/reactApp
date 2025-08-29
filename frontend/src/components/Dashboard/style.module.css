@@ -73,3 +73,11 @@
   align-items: center;
   gap: 12px;
 }
+
+.gradeInput {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  /* justify-content: center; */
+}

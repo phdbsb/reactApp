@@ -18,6 +18,7 @@ import { UserRole } from "@/api/endpoints/auth/types";
 import { useGetImagesQuery } from "@/api/endpoints/images";
 import { useTranslation } from "react-i18next";
 import GenericTable from "../GenericTable/GenericTable";
+import { useUserImages } from "@/hooks/useUserImages";
 
 const AdminDashboard = () => {
   const { data: users = [] } = useGetAllusersQuery();
@@ -26,20 +27,21 @@ const AdminDashboard = () => {
   const { t } = useTranslation();
 
   const { data: userIdImage = [] } = useGetUsersIdImageQuery();
-  const { data: imagesData = [] } = useGetImagesQuery(userIdImage, {
-    skip: userIdImage.length === 0,
-  });
+  const { imageMap } = useUserImages(userIdImage);
+  // const { data: imagesData = [] } = useGetImagesQuery(userIdImage, {
+  //   skip: userIdImage.length === 0,
+  // });
 
   const [editedRoles, setEditedRoles] = useState<Record<string, UserRole>>({});
   const [selectedRows, setSelectedRows] = useState<Set<string>>(new Set());
 
-  const imageMap = useMemo(() => {
-    const map: Record<string, string> = {};
-    imagesData.forEach((img: { userId: string; imageData: Blob }) => {
-      map[img.userId] = URL.createObjectURL(img.imageData);
-    });
-    return map;
-  }, [imagesData]);
+  // const imageMap = useMemo(() => {
+  //   const map: Record<string, string> = {};
+  //   imagesData.forEach((img: { userId: string; imageData: Blob }) => {
+  //     map[img.userId] = URL.createObjectURL(img.imageData);
+  //   });
+  //   return map;
+  // }, [imagesData]);
 
   const handleRoleChange = (user: UserDisplay, newRole: UserRole) => {
     const editedRole = user.role;

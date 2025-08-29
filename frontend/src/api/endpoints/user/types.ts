@@ -2,16 +2,12 @@ import { IAuthResponse, IReg, UserRole } from "../auth/types";
 
 export type UserDisplay = IAuthResponse;
 
-export type UserIdImage = { userId: string; imageData: string };
+export type UserIdImage = { userId: string; imagePath: string };
 
 export type UserRoleUpdate = Record<string, UserRole>;
 
 export type UserInfoUpdate = Omit<IReg, "email" | "password">;
 
-export interface StudentRegistration {
-  userId: string;
-  firstName: string;
-  lastName: string;
-  email: string;
-  grade: number | null;
-}
+type IAuthResponseWithoutRoleImagePath = Omit<IAuthResponse, "role" | "imagePath">;
+
+export type StudentRegistration = IAuthResponseWithoutRoleImagePath & {grade: number | null, imagePath: string};
