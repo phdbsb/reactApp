@@ -56,7 +56,7 @@ namespace ReactAppBack.Services
                     results.Add(new ImageResponseDto
                     {
                         UserId = req.UserId,
-                        ImageData = null
+                        ImagePath = null
                     });
                     continue;
                 }
@@ -71,7 +71,7 @@ namespace ReactAppBack.Services
                 results.Add(new ImageResponseDto
                 {
                     UserId = req.UserId,
-                    ImageData = imageBytes
+                    ImagePath = imageBytes
                 });
             }
             
