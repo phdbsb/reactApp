@@ -80,6 +80,7 @@ const AdminDashboard = () => {
     setSelectedRows(new Set());
   };
 
+  // TODO ovo bi mogo da izvuces u drugi fajl, gde god da imas definicije za kolone zapravo
   const columns: GridColDef[] = [
     {
       field: "name",

@@ -13,6 +13,7 @@ const baseQuery = fetchBaseQuery({
   credentials: "include",
 });
 
+// TODO ovaj middleware bi mogao da izmenis i da handluje sve greske koje vrati back
 const middleware401: BaseQueryFn<
   string | FetchArgs,
   unknown,

@@ -15,8 +15,9 @@ const UserImage = ({ imagePath, sx }: ImageProps) => {
     return blob ? URL.createObjectURL(blob) : undefined;
   }, [blob]);
 
-  return <Avatar src={avatarUrl} sx={sx} />;
-  
+  // TODO daj takodje alt avataru i to nek bude korisnicko ime, ako nema profilnu pisace prvo pocetno slovo
+  // TODO takodje mozes da das i boju, randomizuj to, npr niz od random boje napravi ovde i odaberi random izmedju tih boja, u zavisnosti od pocetnog slova
+  return <Avatar alt={"Mihailo P"} src={avatarUrl} sx={sx} />;
 };
 
 export default UserImage;

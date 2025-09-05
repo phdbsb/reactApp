@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { setUser } from "./store/features/authSlice";
 import { AppDispatch } from "./store";
 
+// TODO should this be component?
 export const AuthInitializer = () => {
   const location = useLocation();
   const dispatch = useDispatch<AppDispatch>();

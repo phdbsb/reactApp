@@ -21,7 +21,6 @@ import { AppDispatch } from "@/store";
 import { setUser } from "@/store/features/authSlice";
 import { useDispatch } from "react-redux";
 
-
 const LoginForm = () => {
   const {
     register,
@@ -47,7 +46,7 @@ const LoginForm = () => {
       }
 
       dispatch(setUser(response.data));
-      
+
       toast.success(t("logRegText.login"));
       navigate("/");
     } catch (err) {
@@ -71,7 +70,7 @@ const LoginForm = () => {
   ];
 
   const formVariants = {
-    hidden: { opacity: 0, y: -20 }, 
+    hidden: { opacity: 0, y: -20 },
     visible: {
       opacity: 1,
       y: 0,
@@ -88,7 +87,11 @@ const LoginForm = () => {
     <div className={styles["pageContainer"]}>
       <div className={styles["logRegCard"]}>
         <div className={styles["leftPane"]}>
-          <img src="/assets/login2.svg" alt="Login illustration" className={styles["loginImage"]} />
+          <img
+            src="/assets/login2.svg"
+            alt="Login illustration"
+            className={styles["loginImage"]}
+          />
         </div>
         <motion.div
           variants={formVariants}
@@ -103,7 +106,7 @@ const LoginForm = () => {
             className={styles["formBox"]}
           >
             <Typography variant="h5" className={styles["formTitle"]}>
-              {t('logRegForm.welcomeBack')}
+              {t("logRegForm.welcomeBack")}
             </Typography>
             {LoginFields.map((field) => (
               <TextField
@@ -131,13 +134,13 @@ const LoginForm = () => {
                   ...(field.name === "email" && {
                     pattern: {
                       value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                      message: t('logRegForm.invalidEmail'),
+                      message: t("logRegForm.invalidEmail"),
                     },
                   }),
                   ...(field.name === "password" && {
                     minLength: {
                       value: 8,
-                      message: t('logRegForm.passwordMinLength'),
+                      message: t("logRegForm.passwordMinLength"),
                     },
                   }),
                 })}
@@ -169,18 +172,18 @@ const LoginForm = () => {
               className={styles["submitButton"]}
               sx={{ marginTop: "1.25rem" }}
             >
-              {t('logRegForm.login')}
+              {t("logRegForm.login")}
             </Button>
             <Typography
               className={styles["switchText"]}
               sx={{ fontSize: "0.85rem", marginTop: "3rem" }}
             >
-              {t('logRegForm.noAccount')}{" "}
+              {t("logRegForm.noAccount")}{" "}
               <span
                 className={styles["signLink"]}
                 onClick={() => navigate("/register")}
               >
-                {t('logRegForm.signUp')}
+                {t("logRegForm.signUp")}
               </span>
             </Typography>
           </Box>

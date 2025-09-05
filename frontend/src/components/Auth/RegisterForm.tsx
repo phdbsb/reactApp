@@ -145,6 +145,9 @@ const RegisterForm = () => {
             <Typography variant="h5" className={styles["formTitle"]}>
               {t("logRegForm.createAccount")}
             </Typography>
+            {/* // TODO wow ovo je predug elemenat za for petlju, ili ga uprosti ili izvuci u zasebnu komponentu
+            //  koju mozes da resusas 
+            // Npr mozes da koristis jednu promenjivu umesto showPassowrd and showConfimrPassword, jos je i bolje cak */}
             {registerFields.map((field) => (
               <TextField
                 key={field.name}

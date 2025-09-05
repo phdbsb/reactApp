@@ -96,6 +96,7 @@ const Exams = () => {
 
   const handleSave = async (exam: ExamCard) => {
     if (formState.isEditMode && formState.examToEditId) {
+      // TODO zasto prepisujemo ovako objekat, samo smo duplirali i napravili isti
       const updatedExam: ExamCard = {
         id: exam.id,
         title: exam.title,
@@ -158,6 +159,7 @@ const Exams = () => {
     setShowConfirmDialog(false);
   };
 
+  // TODO ovo ti mozda ne treba ( tvoje reci )
   const mappedPassedExams = passedExams
     ?.filter((pe) => pe.passed)
     .map((pe) => {

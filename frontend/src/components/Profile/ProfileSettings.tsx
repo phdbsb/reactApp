@@ -28,7 +28,7 @@ const ProfileSettings = () => {
 
   const [uploadProfileImage] = useUploadProfileImageMutation();
   const [deleteProfileImage] = useDeleteProfileImageMutation();
-
+  // TODO izbrisi viska console.logove
   console.log(user?.imagePath);
 
   const [updateUserInfo] = useUpdateUserInfoMutation();
@@ -47,6 +47,8 @@ const ProfileSettings = () => {
     );
   }, [firstName, lastName, user]);
 
+  // TODO miislim da bi i ovu funkcionalnost mogo da izvuces, da uprostis fajl i
+  // da mozes da reusas nekad funkcionalnost
   const handleFileChange = async (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (!file) return;

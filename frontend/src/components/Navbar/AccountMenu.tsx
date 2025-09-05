@@ -123,6 +123,8 @@ const AccountMenu = () => {
           <Avatar /> {t("accountMenu.myAccount")}
         </MenuItem> */}
         <Divider />
+        // TODO za ovakve stvari je bolje da napravis niz objekata, u ovom slucaju bi samo imao text i funkciju handleClose / handleLogout
+        // TODO i onda ovde loopujes kroz elemente. Umesto da pises svaki posebno.
         <MenuItem onClick={handleClose}>
           <ListItemIcon>
             <PersonAdd fontSize="small" />

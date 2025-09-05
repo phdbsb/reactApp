@@ -53,6 +53,7 @@ const App = () => {
           />
           <Route path="/profile" element={<ProfileSettings />} />
           <Route path="/unauthorized" element={<Unauthorized />} />
+          // TODO trebao bi da imas neku komponentu za 404, nesto prosto
           {/* <Route path="*" element={}/> */}
         </Routes>
       </BrowserRouter>

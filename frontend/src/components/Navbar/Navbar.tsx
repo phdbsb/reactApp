@@ -13,12 +13,13 @@ const Navbar = ({ themeMode, toggleTheme }: themeProps) => {
   const location = useLocation();
   const navigate = useNavigate();
 
+  // TODO nista spec samo promenjive bi trebao uvek na vrhu fajla da definises, ovako nesto, da se ne upetljavas kasnije
   const hiddenOnRoutes = ["/login", "/register", "/unauthorized"];
+  const routesWithBackButton = ["/admin-dashboard", "/profile"];
+  
   if (hiddenOnRoutes.includes(location.pathname)) {
     return null;
   }
-
-  const routesWithBackButton = ["/admin-dashboard", "/profile"];
 
   const showBackButton = routesWithBackButton.includes(location.pathname);
 
