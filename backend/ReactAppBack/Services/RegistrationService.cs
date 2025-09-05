@@ -1,6 +1,7 @@
 using Models;
 using Microsoft.EntityFrameworkCore;
 using DTOs;
+using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace ReactAppBack.Services
 {
@@ -11,6 +12,7 @@ namespace ReactAppBack.Services
         Task<Registration> GetRegistrationByIdAsync(Guid id);
         Task<bool> UpdatePassedStatus(Guid userId, UpdatePassedStatusDto updatePassedStatusDto);
         Task<List<ExamPassedDto>> GetPassedExams(Guid userId);
+        Task<bool?> UpdateGrade(UpdateGradeDto updateGradeDto);
     }
     
     public class RegistrationService : IRegistrationService
@@ -102,6 +104,28 @@ namespace ReactAppBack.Services
                 .ToListAsync();
 
             return registrations;
+        }
+
+        public async Task<bool?> UpdateGrade(UpdateGradeDto updateGradeDto)
+        {
+            if (updateGradeDto.Grade < 5 || updateGradeDto.Grade > 10)
+                return null;
+            
+            var registration = await _context.Registrations
+                .Include(r => r.User)
+                .Include(r => r.Exam)
+                .Where(r => r.User.ID == updateGradeDto.UserId && r.Exam.ID == updateGradeDto.ExamId)
+                .OrderByDescending(r => r.Deadline.DateTo)
+                .FirstOrDefaultAsync();
+            
+            if (registration == null)
+                return false;
+            
+            registration.Grade = updateGradeDto.Grade;
+            registration.Passed = updateGradeDto.Grade >= 6;
+            await _context.SaveChangesAsync();
+            
+            return true;
         }
     }
 }

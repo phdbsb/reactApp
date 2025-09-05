@@ -107,6 +107,27 @@ namespace ReactAppBack.Controllers
            
         }
         
+        [HttpPut("grade")]
+        [Authorize(Roles = "Professor")]
+        public async Task<ActionResult> UpdateGrade([FromBody] UpdateGradeDto updateGradeDto)
+        {
+            try
+            {
+                var result = await _registrationService.UpdateGrade(updateGradeDto);
+                if (result == null)
+                    return Ok(new { grade = (int?)null });
+                
+                if (result == false)
+                    return NotFound("Registration not found");
+
+                return Ok(new { message = "Grade updated successfully" });
+            }
+            catch (ArgumentException e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+        
     }
 }
 
