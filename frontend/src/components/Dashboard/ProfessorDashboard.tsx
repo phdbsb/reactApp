@@ -6,10 +6,13 @@ import GenericTable from "../GenericTable/GenericTable";
 import { useUserImages } from "@/hooks/useUserImages";
 import styles from "./style.module.css";
 import { Avatar, TextField } from "@mui/material";
+import { useUpdateGradeMutation } from "@/api/endpoints/registrations";
+import { ChangeEvent, FocusEvent, FocusEventHandler, useState } from "react";
 
 const ProfessorDashboard = () => {
   const { examId } = useParams<{ examId: string }>();
   const { data: students = [] } = useGetStudentsByRegistrationQuery(examId!);
+  const [updateGrade] = useUpdateGradeMutation();
 
   const studentImages = students.map((student) => ({
     userId: student.userId,
@@ -53,16 +56,51 @@ const ProfessorDashboard = () => {
       flex: 1,
       renderCell: (params: GridRenderCellParams) => {
         const student = params.row as StudentRegistration;
+
+        const [localGrade, setLocalGrade] = useState<string>(
+          student.grade?.toString() ?? ""
+        );
+
+        const handleLocalChange = (e: ChangeEvent<HTMLInputElement>) => {
+          setLocalGrade(e.target.value);
+        };
+
+        const handleBlur = async (e: FocusEvent<HTMLInputElement>) => {
+          const value = e.target.value;
+
+          const newGrade = Number(value);
+
+          const result = await updateGrade({
+            userId: student.userId,
+            examId: examId!,
+            grade: newGrade,
+          });
+
+          if (result.data?.grade === null) {
+            setLocalGrade(student.grade?.toString() ?? ""); 
+          } else {
+            student.grade = newGrade;
+          }
+        };
+
         return (
           <div className={styles["gradeInput"]}>
             <TextField
               type="number"
               placeholder=""
-              value={student.grade ?? ""}
+              value={localGrade}
               size="small"
               variant="standard"
-              fullWidth = {true}
+              fullWidth={true}
               style={{ width: 80 }}
+              onChange={handleLocalChange}
+              onBlur={handleBlur}
+              className={styles.centeredInput}
+              slotProps={{
+                input: {
+                  style: { textAlign: "center" },
+                },
+              }}
             />
           </div>
         );

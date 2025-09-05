@@ -1,4 +1,4 @@
-import { IRegistration, UpdatePassedModel } from "./types";
+import { IRegistration, StudentData, UpdatePassedModel } from "./types";
 import { baseApi } from "@/api";
 
 export const registrationsApi = baseApi.injectEndpoints({
@@ -30,6 +30,15 @@ export const registrationsApi = baseApi.injectEndpoints({
             }),
             invalidatesTags: ["Registrations", "Exams"],
         }),
+
+        updateGrade: builder.mutation<{ grade: number | null }, StudentData>({
+            query: (student) => ({
+                url: "registrations/grade",
+                method: "PUT",
+                body: student
+            }),
+            invalidatesTags: ["Registrations", "Exams"],
+        })
     }),
 });
 
@@ -38,5 +47,6 @@ export const {
     useGetPassedStatusQuery,
     useGetPassedExamsQuery,
     useRegisterExamMutation,
-    useUpdatePassedStatusMutation
+    useUpdatePassedStatusMutation,
+    useUpdateGradeMutation
 } = registrationsApi;

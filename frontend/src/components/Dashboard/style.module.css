@@ -81,3 +81,7 @@
   width: 100%;
   /* justify-content: center; */
 }
+
+.centeredInput input {
+  text-align: center;
+}

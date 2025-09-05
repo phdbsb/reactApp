@@ -14,13 +14,21 @@ const Navbar = ({ themeMode, toggleTheme }: themeProps) => {
   const navigate = useNavigate();
 
   const hiddenOnRoutes = ["/login", "/register", "/unauthorized"];
-  if (hiddenOnRoutes.includes(location.pathname)) {
+
+
+  const routesWithBackButton = [
+    "/admin-dashboard",
+    "/profile",
+    "/professor-dashboard",
+  ];
+
+    if (hiddenOnRoutes.includes(location.pathname)) {
     return null;
   }
 
-  const routesWithBackButton = ["/admin-dashboard", "/profile", "/professor-dashboard"];
-
-  const showBackButton = routesWithBackButton.includes(location.pathname);
+  const showBackButton = routesWithBackButton.some((route) =>
+    location.pathname.startsWith(route)
+  );
 
   return (
     <nav className={styles["navbar-container"]}>
