@@ -62,6 +62,18 @@ namespace ReactAppBack.Controllers
                 return BadRequest(e.Message);
             }
         }
+        
+        [HttpGet("my-exams")]
+        [Authorize(Roles = "Professor")]
+        public async Task<IActionResult> GetMyExams()
+        {
+            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            if (string.IsNullOrEmpty(userIdClaim) || !Guid.TryParse(userIdClaim, out var userId))
+                return Unauthorized("Invalid user ID in token");
+
+            var exams = await _examService.GetUserExams(userId);
+            return Ok(exams);
+        }
 
         [HttpPost]
         [Authorize(Roles = "Professor")]

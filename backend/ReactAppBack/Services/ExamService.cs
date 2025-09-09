@@ -10,6 +10,7 @@ namespace ReactAppBack.Services
     {
         Task<List<GetExamDTO>> GetExams(Guid userId);
         Task<Exam> GetExamByIdAsync(Guid id);
+        Task<List<ExamIdDto>> GetUserExams(Guid userId);
         Task<string> AddExamAsync(ExamDTO examDto, Guid userId);
         Task<string> UpdateExamAsync(Guid id, EditDTO examDto, Guid userId);
         Task<string> ArchiveExam(Guid id, Guid userId);
@@ -115,6 +116,17 @@ namespace ReactAppBack.Services
                 throw new ArgumentException("No exam found!");
             }
             return exam;
+        }
+        
+        public async Task<List<ExamIdDto>> GetUserExams(Guid userId)
+        {
+            return await _context.Users
+                .Where(u => u.ID == userId)
+                .SelectMany(u => u.Exams)
+                .Select(e => new ExamIdDto
+                {
+                    ExamId = e.ID
+                }).ToListAsync();
         }
 
         public async Task<string> AddExamAsync(ExamDTO examDto, Guid userId)
