@@ -8,7 +8,9 @@
     "noStartTime": "Nema vreme početka",
     "title": "Moji ispiti",
     "create": "Kreiraj",
-    "history": "Istorija"
+    "all_exams": "Svi ispiti",
+    "passed_exams": "Položeni ispiti",
+    "grade": "Ocena"
   },
   "dialog": {
     "deleteExamTitle": "Obriši ispit",

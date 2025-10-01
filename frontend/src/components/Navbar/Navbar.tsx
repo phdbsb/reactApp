@@ -15,14 +15,13 @@ const Navbar = ({ themeMode, toggleTheme }: themeProps) => {
 
   const hiddenOnRoutes = ["/login", "/register", "/unauthorized"];
 
-
   const routesWithBackButton = [
     "/admin-dashboard",
     "/profile",
     "/professor-dashboard",
   ];
 
-    if (hiddenOnRoutes.includes(location.pathname)) {
+  if (hiddenOnRoutes.includes(location.pathname)) {
     return null;
   }
 

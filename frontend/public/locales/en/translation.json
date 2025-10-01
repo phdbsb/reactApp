@@ -8,7 +8,9 @@
     "noStartTime": "No start time",
     "title": "My Exams",
     "create": "Create",
-    "history": "History"
+    "all_exams": "All Exams",
+    "passed_exams": "Passed Exams",
+    "grade": "Grade"
   },
   "dialog": {
     "deleteExamTitle": "Delete exam",

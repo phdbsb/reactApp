@@ -4,7 +4,7 @@ export interface IRegistration {
 }
 
 type IRegWithoutDeadlineId = Omit<IRegistration, "deadlineId">;
-export type UpdatePassedModel = IRegWithoutDeadlineId & { passed: boolean; };
+export type UpdatePassedModel = IRegWithoutDeadlineId & { passed: boolean, grade: number };
 
 export interface StudentData {
     userId: string,

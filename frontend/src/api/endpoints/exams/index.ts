@@ -1,4 +1,4 @@
-import { ExamCard, IExamCard, IGetExams } from "./types";
+import { ExamCard, IExamCard, IGetExams, IOtherExam } from "./types";
 import { createAddExamObject } from "@/utils/AddExam";
 import { baseApi } from "@/api";
 
@@ -6,6 +6,11 @@ export const examsApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getExams: builder.query<IGetExams[], void>({
       query: () => "exams",
+      providesTags: ["Exams"],
+    }),
+
+    getOtherExams: builder.query<IOtherExam[], void>({  
+      query: () => "exams/other-exams",
       providesTags: ["Exams"],
     }),
 
@@ -39,6 +44,7 @@ export const examsApi = baseApi.injectEndpoints({
 
 export const {
   useGetExamsQuery,
+  useGetOtherExamsQuery,
   useAddExamMutation,
   useUpdateExamMutation,
   useArchiveExamMutation,

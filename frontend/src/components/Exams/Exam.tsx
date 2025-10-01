@@ -18,6 +18,8 @@ interface ExamCardProps {
   onEditClick: (exam: ExamCard) => void;
   onDeleteClick: (exam: ExamCard) => void;
   onReportClick: (exam: ExamCard) => void;
+  canEdit?: boolean;
+  grade?: number;
 }
 
 const Exam = ({
@@ -26,8 +28,10 @@ const Exam = ({
   onDeleteClick,
   onReportClick,
   timeLeft,
+  canEdit,
+  grade
 }: ExamCardProps) => {
-  const [updatePassedStatus] = useUpdatePassedStatusMutation();
+  // const [updatePassedStatus] = useUpdatePassedStatusMutation();
   const [showMenu, setShowMenu] = useState(false);
   const { isStudent, isProfessor } = useAuth();
 
@@ -40,16 +44,16 @@ const Exam = ({
   const navigate = useNavigate();
   const { t } = useTranslation();
 
-  const onPassClick = async (exam: ExamCard) => {
-    try {
-      await updatePassedStatus({
-        examId: exam.id,
-        passed: !passedStatus,
-      });
-    } catch (error) {
-      console.error("Error updating passed status", error);
-    }
-  };
+  // const onPassClick = async (exam: ExamCard) => {
+  //   try {
+  //     await updatePassedStatus({
+  //       examId: exam.id,
+  //       passed: !passedStatus,
+  //     });
+  //   } catch (error) {
+  //     console.error("Error updating passed status", error);
+  //   }
+  // };
 
   return (
     <div
@@ -57,7 +61,7 @@ const Exam = ({
         passedStatus ? styles["passed"] : ""
       }`}
       onClick={() => {
-        if (isProfessor) {
+        if (isProfessor && canEdit) {
           navigate(`/professor-dashboard/${exam.id}`);
         }
       }}
@@ -112,13 +116,14 @@ const Exam = ({
             ) : (
               <span
                 className={styles["pass-button"]}
-                onClick={() => onPassClick(exam)}
+                // onClick={() => onPassClick(exam)}
               >
-                {passedStatus ? t("exam.notPassed") : t("exam.passed")}
+                {/* {passedStatus ? t("exam.notPassed") : t("exam.passed")} */}
               </span>
             )}
           </>
         )}
+        {grade && <span className={styles["exam-grade"]}>{t("exam.grade")}: {grade}</span>}
       </div>
     </div>
   );

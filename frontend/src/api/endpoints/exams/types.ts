@@ -27,3 +27,5 @@ export class ExamCard {
         this.schedule = schedule;
     }
 };
+
+export type IOtherExam = Omit<IExamCard, "semester" | "schedule">;

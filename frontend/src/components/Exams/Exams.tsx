@@ -5,11 +5,12 @@ import { parseISO, formatDistanceToNow, isPast } from "date-fns";
 import styles from "./style.module.css";
 import Popup from "../Popup/Popup";
 import { useMemo } from "react";
-import { ExamCard, IGetExams } from "@/api/endpoints/exams/types";
+import { ExamCard, IGetExams, IOtherExam } from "@/api/endpoints/exams/types";
 import {
   useAddExamMutation,
   useArchiveExamMutation,
   useGetExamsQuery,
+  useGetOtherExamsQuery,
   useUpdateExamMutation,
 } from "@/api/endpoints/exams";
 import {
@@ -27,6 +28,10 @@ const Exams = () => {
   const [updateExam] = useUpdateExamMutation();
   const [registerExam] = useRegisterExamMutation();
   const [archiveExam] = useArchiveExamMutation();
+
+  const { data: otherExams } = useGetOtherExamsQuery();
+  const otherExamsList = otherExams || [];
+
   const { isStudent, isProfessor } = useAuth();
   const { t } = useTranslation();
 
@@ -158,13 +163,15 @@ const Exams = () => {
     setShowConfirmDialog(false);
   };
 
+  // console.log("PassedExams: ", passedExams);
+
   const mappedPassedExams = passedExams
-    ?.filter((pe) => pe.passed)
+  ?.filter((pe) => pe.passed)
     .map((pe) => {
       const fullExam = exams?.find((exam) => exam.id === pe.examId);
-      return fullExam ? { ...fullExam } : null;
+      return fullExam ? { ...fullExam, grade: pe.grade } : null;
     })
-    .filter((exam): exam is IGetExams => exam !== null);
+    .filter((exam): exam is IGetExams & {grade: number } => exam !== null);
 
   const notPassedExams = exams?.filter(
     (exam) => !passedExams?.some((pe) => pe.examId === exam.id && pe.passed)
@@ -196,21 +203,40 @@ const Exams = () => {
                 onDeleteClick={onDeleteClick}
                 onReportClick={onReportClick}
                 timeLeft={timeLeftMap[exam.id] || ""}
+                canEdit={true}
               />
             ))}
           </div>
-          <h2 className={styles["passed-title"]}>{t("exam.history")}</h2>
+          {isProfessor && otherExamsList?.length > 0 && (
+            <div className={styles["other-exams-container"]}>
+              <h2 className={styles["all-exams-title"]}>{t("exam.all_exams")}</h2>
+              {otherExams?.map((exam, index) => (
+                <Exam
+                  key={`${exam.id}-${index}`}
+                  exam={{ id: exam.id, title: exam.title } as any}
+                  onEditClick={() => {}}
+                  onDeleteClick={() => {}}
+                  onReportClick={() => {}}
+                  timeLeft={""}
+                  canEdit={false}
+                />
+              ))}
+            </div>
+          )}
           <div className={styles["passed-exams-container"]}>
-            {mappedPassedExams?.map((exam, index) => (
-              <Exam
-                key={`${exam.id}-${index}`}
-                exam={exam}
-                onEditClick={onEditClick}
-                onDeleteClick={onDeleteClick}
-                onReportClick={onReportClick}
-                timeLeft={timeLeftMap[exam.id] || ""}
-              />
-            ))}
+            <h2 className={styles["passed-title"]}>{t("exam.passed_exams")}</h2>
+            {isStudent &&
+              mappedPassedExams?.map((exam, index) => (
+                <Exam
+                  key={`${exam.id}-${index}`}
+                  exam={exam}
+                  onEditClick={onEditClick}
+                  onDeleteClick={onDeleteClick}
+                  onReportClick={onReportClick}
+                  timeLeft={timeLeftMap[exam.id] || ""}
+                  grade={exam.grade}
+                />
+              ))}
           </div>
         </div>
       </div>

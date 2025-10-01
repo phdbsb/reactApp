@@ -44,7 +44,7 @@
   background-color: #0056b3;
 }
 
-.exams-container {
+.exams-container, .other-exams-container, .passed-exams-container {
   grid-column: 1 / -1;
   display: grid;
   grid-template-columns: repeat(4, 340px);
@@ -64,23 +64,18 @@
   padding-left: 20px;
 }
 
-.passed-title {
+.all-exams-title, .passed-title {
   grid-column: 1 / -1;
   font-size: 22px;
   font-weight: bold;
   margin-bottom: 10px;
 }
 
-.passed-exams-container {
-  grid-column: 1 / -1;
-  display: grid;
-  grid-template-columns: repeat(4, 340px);
-  gap: 20px;
-}
-
 @media (max-width: 1520px) {
   .exams-wrapper,
-  .exams-container {
+  .exams-container,
+  .other-exams-container,
+  .passed-exams-container {
     grid-template-columns: repeat(3, 340px);
     max-width: calc(3 * 340px + 2 * 20px);
   }
@@ -88,7 +83,9 @@
 
 @media (max-width: 1120px) {
   .exams-wrapper,
-  .exams-container {
+  .exams-container,
+  .other-exams-container,
+  .passed-exams-container {
     grid-template-columns: repeat(2, 340px);
     max-width: calc(2 * 340px + 1 * 20px);
   }
@@ -96,7 +93,9 @@
 
 @media (max-width: 720px) {
   .exams-wrapper,
-  .exams-container {
+  .exams-container,
+  .other-exams-container,
+  .passed-exams-container {
     grid-template-columns: 340px;
     max-width: 340px;
   }
@@ -124,14 +123,14 @@
   align-items: center;
 }
 
-.pass-button {
+/* .pass-button {
   padding: 0.25rem 0.5rem;
 }
 
 .pass-button:hover {
   background-color: var(--primary-passbtn-hover);
   border-radius: 4px;
-}
+} */
 
 .exam-title {
   font-size: 1.125rem;
@@ -225,4 +224,12 @@
 .exam-card:hover .icon-wrapper,
 .icon-visible {
   opacity: 1 !important;
+}
+
+.exam-grade {
+  bottom: 8px;
+  right: 12px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #2d7a2d;
 }

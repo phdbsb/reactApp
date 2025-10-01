@@ -15,7 +15,6 @@ import { Typography, Button, Avatar } from "@mui/material";
 import RoleCell from "./RoleCell";
 import styles from "./style.module.css";
 import { UserRole } from "@/api/endpoints/auth/types";
-import { useGetImagesQuery } from "@/api/endpoints/images";
 import { useTranslation } from "react-i18next";
 import GenericTable from "../GenericTable/GenericTable";
 import { useUserImages } from "@/hooks/useUserImages";
