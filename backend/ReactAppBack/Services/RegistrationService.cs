@@ -99,7 +99,8 @@ namespace ReactAppBack.Services
                 .Select(r => new ExamPassedDto
                 {
                     ExamId = r.Exam.ID,
-                    Passed = r.Passed
+                    Passed = r.Passed,
+                    Grade = r.Grade,
                 })
                 .ToListAsync();
 

@@ -8,7 +8,7 @@ namespace ReactAppBack.Services
 {
     public interface IExamService
     {
-        Task<List<GetExamDTO>> GetExams(Guid userId);
+        Task<List<GetExamDTO>> GetExams(Guid userId, bool isProfessor);
         Task<Exam> GetExamByIdAsync(Guid id);
         Task<List<ExamIdDto>> GetUserExams(Guid userId);
         Task<string> AddExamAsync(ExamDTO examDto, Guid userId);
@@ -28,21 +28,36 @@ namespace ReactAppBack.Services
             _mapper = mapper;
         }
         
-        public async Task<List<GetExamDTO>> GetExams(Guid userId)
+        public async Task<List<GetExamDTO>> GetExams(Guid userId, bool isProfessor)
         {
             try
             {
                 var user = await _context.Users
                     .AsNoTracking()
                     .FirstOrDefaultAsync(u => u.ID == userId);
-                
                 if (user == null)
                     throw new Exception("User not found");
 
-                var exams = await _context.Exams
-                    .AsNoTracking()
-                    .Where(e => !e.Archived)
-                    .ToListAsync();
+                // var exams = await _context.Exams
+                //     .AsNoTracking()
+                //     .Where(e => !e.Archived)
+                //     .ToListAsync();
+                
+                List<Exam> exams;
+
+                if (isProfessor)
+                {
+                    exams = await _context.Exams
+                        .Where(e => e.Users.Any(u => u.ID == userId))
+                        .ToListAsync();
+                }
+                else
+                {
+                    exams = await _context.Exams
+                        .AsNoTracking()
+                        .Where(e => !e.Archived)
+                        .ToListAsync();
+                }
 
                 if (!exams.Any()) 
                     return new List<GetExamDTO>();
@@ -120,13 +135,14 @@ namespace ReactAppBack.Services
         
         public async Task<List<ExamIdDto>> GetUserExams(Guid userId)
         {
-            return await _context.Users
-                .Where(u => u.ID == userId)
-                .SelectMany(u => u.Exams)
+            return await _context.Exams
+                .Where(e => e.Users.All(u => u.ID != userId))
                 .Select(e => new ExamIdDto
                 {
-                    ExamId = e.ID
-                }).ToListAsync();
+                    ExamId = e.ID,
+                    Title = e.Title
+                })
+                .ToListAsync();
         }
 
         public async Task<string> AddExamAsync(ExamDTO examDto, Guid userId)

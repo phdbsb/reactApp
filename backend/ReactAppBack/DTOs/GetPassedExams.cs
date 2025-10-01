@@ -4,5 +4,6 @@ namespace DTOs
     {
         public Guid ExamId { get; set; }
         public bool Passed { get; set; }
+        public int? Grade { get; set; }
     }
 }
