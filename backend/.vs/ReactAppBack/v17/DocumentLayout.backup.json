@@ -1,0 +1,281 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\krsti\\Documents\\react-app\\backend\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{22445A48-A516-473A-BBAD-5564570F003E}|ReactAppBack\\ReactAppBack.csproj|c:\\users\\krsti\\documents\\react-app\\backend\\reactappback\\dtos\\deadlinedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{22445A48-A516-473A-BBAD-5564570F003E}|ReactAppBack\\ReactAppBack.csproj|solutionrelative:reactappback\\dtos\\deadlinedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{22445A48-A516-473A-BBAD-5564570F003E}|ReactAppBack\\ReactAppBack.csproj|c:\\users\\krsti\\documents\\react-app\\backend\\reactappback\\dtos\\createexam.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{22445A48-A516-473A-BBAD-5564570F003E}|ReactAppBack\\ReactAppBack.csproj|solutionrelative:reactappback\\dtos\\createexam.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{22445A48-A516-473A-BBAD-5564570F003E}|ReactAppBack\\ReactAppBack.csproj|c:\\users\\krsti\\documents\\react-app\\backend\\reactappback\\dtos\\edit.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{22445A48-A516-473A-BBAD-5564570F003E}|ReactAppBack\\ReactAppBack.csproj|solutionrelative:reactappback\\dtos\\edit.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{22445A48-A516-473A-BBAD-5564570F003E}|ReactAppBack\\ReactAppBack.csproj|c:\\users\\krsti\\documents\\react-app\\backend\\reactappback\\mapping\\automapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{22445A48-A516-473A-BBAD-5564570F003E}|ReactAppBack\\ReactAppBack.csproj|solutionrelative:reactappback\\mapping\\automapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{22445A48-A516-473A-BBAD-5564570F003E}|ReactAppBack\\ReactAppBack.csproj|c:\\users\\krsti\\documents\\react-app\\backend\\reactappback\\services\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{22445A48-A516-473A-BBAD-5564570F003E}|ReactAppBack\\ReactAppBack.csproj|solutionrelative:reactappback\\services\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{22445A48-A516-473A-BBAD-5564570F003E}|ReactAppBack\\ReactAppBack.csproj|c:\\users\\krsti\\documents\\react-app\\backend\\reactappback\\dtos\\createuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{22445A48-A516-473A-BBAD-5564570F003E}|ReactAppBack\\ReactAppBack.csproj|solutionrelative:reactappback\\dtos\\createuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{22445A48-A516-473A-BBAD-5564570F003E}|ReactAppBack\\ReactAppBack.csproj|c:\\users\\krsti\\documents\\react-app\\backend\\reactappback\\dtos\\registrationdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{22445A48-A516-473A-BBAD-5564570F003E}|ReactAppBack\\ReactAppBack.csproj|solutionrelative:reactappback\\dtos\\registrationdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{22445A48-A516-473A-BBAD-5564570F003E}|ReactAppBack\\ReactAppBack.csproj|c:\\users\\krsti\\documents\\react-app\\backend\\reactappback\\dtos\\logindto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{22445A48-A516-473A-BBAD-5564570F003E}|ReactAppBack\\ReactAppBack.csproj|solutionrelative:reactappback\\dtos\\logindto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{22445A48-A516-473A-BBAD-5564570F003E}|ReactAppBack\\ReactAppBack.csproj|c:\\users\\krsti\\documents\\react-app\\backend\\reactappback\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{22445A48-A516-473A-BBAD-5564570F003E}|ReactAppBack\\ReactAppBack.csproj|solutionrelative:reactappback\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{22445A48-A516-473A-BBAD-5564570F003E}|ReactAppBack\\ReactAppBack.csproj|c:\\users\\krsti\\documents\\react-app\\backend\\reactappback\\controllers\\examcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{22445A48-A516-473A-BBAD-5564570F003E}|ReactAppBack\\ReactAppBack.csproj|solutionrelative:reactappback\\controllers\\examcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{22445A48-A516-473A-BBAD-5564570F003E}|ReactAppBack\\ReactAppBack.csproj|c:\\users\\krsti\\documents\\react-app\\backend\\reactappback\\dtos\\studentregistrationdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{22445A48-A516-473A-BBAD-5564570F003E}|ReactAppBack\\ReactAppBack.csproj|solutionrelative:reactappback\\dtos\\studentregistrationdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{22445A48-A516-473A-BBAD-5564570F003E}|ReactAppBack\\ReactAppBack.csproj|c:\\users\\krsti\\documents\\react-app\\backend\\reactappback\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{22445A48-A516-473A-BBAD-5564570F003E}|ReactAppBack\\ReactAppBack.csproj|solutionrelative:reactappback\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{22445A48-A516-473A-BBAD-5564570F003E}|ReactAppBack\\ReactAppBack.csproj|c:\\users\\krsti\\documents\\react-app\\backend\\reactappback\\dtos\\regloguser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{22445A48-A516-473A-BBAD-5564570F003E}|ReactAppBack\\ReactAppBack.csproj|solutionrelative:reactappback\\dtos\\regloguser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{22445A48-A516-473A-BBAD-5564570F003E}|ReactAppBack\\ReactAppBack.csproj|c:\\users\\krsti\\documents\\react-app\\backend\\reactappback\\services\\tokenservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{22445A48-A516-473A-BBAD-5564570F003E}|ReactAppBack\\ReactAppBack.csproj|solutionrelative:reactappback\\services\\tokenservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{22445A48-A516-473A-BBAD-5564570F003E}|ReactAppBack\\ReactAppBack.csproj|c:\\users\\krsti\\documents\\react-app\\backend\\reactappback\\services\\examservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{22445A48-A516-473A-BBAD-5564570F003E}|ReactAppBack\\ReactAppBack.csproj|solutionrelative:reactappback\\services\\examservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 197,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "DeadlineDTO.cs",
+              "DocumentMoniker": "C:\\Users\\krsti\\Documents\\react-app\\backend\\ReactAppBack\\DTOs\\DeadlineDTO.cs",
+              "RelativeDocumentMoniker": "ReactAppBack\\DTOs\\DeadlineDTO.cs",
+              "ToolTip": "C:\\Users\\krsti\\Documents\\react-app\\backend\\ReactAppBack\\DTOs\\DeadlineDTO.cs",
+              "RelativeToolTip": "ReactAppBack\\DTOs\\DeadlineDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-29T00:23:19.026Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Edit.cs",
+              "DocumentMoniker": "C:\\Users\\krsti\\Documents\\react-app\\backend\\ReactAppBack\\DTOs\\Edit.cs",
+              "RelativeDocumentMoniker": "ReactAppBack\\DTOs\\Edit.cs",
+              "ToolTip": "C:\\Users\\krsti\\Documents\\react-app\\backend\\ReactAppBack\\DTOs\\Edit.cs",
+              "RelativeToolTip": "ReactAppBack\\DTOs\\Edit.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-29T00:22:01.378Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "AutoMapper.cs",
+              "DocumentMoniker": "C:\\Users\\krsti\\Documents\\react-app\\backend\\ReactAppBack\\Mapping\\AutoMapper.cs",
+              "RelativeDocumentMoniker": "ReactAppBack\\Mapping\\AutoMapper.cs",
+              "ToolTip": "C:\\Users\\krsti\\Documents\\react-app\\backend\\ReactAppBack\\Mapping\\AutoMapper.cs",
+              "RelativeToolTip": "ReactAppBack\\Mapping\\AutoMapper.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-29T00:16:35.79Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "CreateUser.cs",
+              "DocumentMoniker": "C:\\Users\\krsti\\Documents\\react-app\\backend\\ReactAppBack\\DTOs\\CreateUser.cs",
+              "RelativeDocumentMoniker": "ReactAppBack\\DTOs\\CreateUser.cs",
+              "ToolTip": "C:\\Users\\krsti\\Documents\\react-app\\backend\\ReactAppBack\\DTOs\\CreateUser.cs",
+              "RelativeToolTip": "ReactAppBack\\DTOs\\CreateUser.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-29T00:03:40.047Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "CreateExam.cs",
+              "DocumentMoniker": "C:\\Users\\krsti\\Documents\\react-app\\backend\\ReactAppBack\\DTOs\\CreateExam.cs",
+              "RelativeDocumentMoniker": "ReactAppBack\\DTOs\\CreateExam.cs",
+              "ToolTip": "C:\\Users\\krsti\\Documents\\react-app\\backend\\ReactAppBack\\DTOs\\CreateExam.cs",
+              "RelativeToolTip": "ReactAppBack\\DTOs\\CreateExam.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-29T00:03:37.499Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "RegistrationDTO.cs",
+              "DocumentMoniker": "C:\\Users\\krsti\\Documents\\react-app\\backend\\ReactAppBack\\DTOs\\RegistrationDTO.cs",
+              "RelativeDocumentMoniker": "ReactAppBack\\DTOs\\RegistrationDTO.cs",
+              "ToolTip": "C:\\Users\\krsti\\Documents\\react-app\\backend\\ReactAppBack\\DTOs\\RegistrationDTO.cs",
+              "RelativeToolTip": "ReactAppBack\\DTOs\\RegistrationDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-29T00:03:34.65Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "LoginDTO.cs",
+              "DocumentMoniker": "C:\\Users\\krsti\\Documents\\react-app\\backend\\ReactAppBack\\DTOs\\LoginDTO.cs",
+              "RelativeDocumentMoniker": "ReactAppBack\\DTOs\\LoginDTO.cs",
+              "ToolTip": "C:\\Users\\krsti\\Documents\\react-app\\backend\\ReactAppBack\\DTOs\\LoginDTO.cs",
+              "RelativeToolTip": "ReactAppBack\\DTOs\\LoginDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-29T00:02:42.419Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "AuthService.cs",
+              "DocumentMoniker": "C:\\Users\\krsti\\Documents\\react-app\\backend\\ReactAppBack\\Services\\AuthService.cs",
+              "RelativeDocumentMoniker": "ReactAppBack\\Services\\AuthService.cs",
+              "ToolTip": "C:\\Users\\krsti\\Documents\\react-app\\backend\\ReactAppBack\\Services\\AuthService.cs",
+              "RelativeToolTip": "ReactAppBack\\Services\\AuthService.cs",
+              "ViewState": "AgIAABUAAAAAAAAAAAAowDEAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-28T23:22:33.813Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "StudentRegistrationDTO.cs",
+              "DocumentMoniker": "C:\\Users\\krsti\\Documents\\react-app\\backend\\ReactAppBack\\DTOs\\StudentRegistrationDTO.cs",
+              "RelativeDocumentMoniker": "ReactAppBack\\DTOs\\StudentRegistrationDTO.cs",
+              "ToolTip": "C:\\Users\\krsti\\Documents\\react-app\\backend\\ReactAppBack\\DTOs\\StudentRegistrationDTO.cs",
+              "RelativeToolTip": "ReactAppBack\\DTOs\\StudentRegistrationDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-29T00:01:49.622Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "RegLogUser.cs",
+              "DocumentMoniker": "C:\\Users\\krsti\\Documents\\react-app\\backend\\ReactAppBack\\DTOs\\RegLogUser.cs",
+              "RelativeDocumentMoniker": "ReactAppBack\\DTOs\\RegLogUser.cs",
+              "ToolTip": "C:\\Users\\krsti\\Documents\\react-app\\backend\\ReactAppBack\\DTOs\\RegLogUser.cs",
+              "RelativeToolTip": "ReactAppBack\\DTOs\\RegLogUser.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-29T00:01:37.151Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "TokenService.cs",
+              "DocumentMoniker": "C:\\Users\\krsti\\Documents\\react-app\\backend\\ReactAppBack\\Services\\TokenService.cs",
+              "RelativeDocumentMoniker": "ReactAppBack\\Services\\TokenService.cs",
+              "ToolTip": "C:\\Users\\krsti\\Documents\\react-app\\backend\\ReactAppBack\\Services\\TokenService.cs",
+              "RelativeToolTip": "ReactAppBack\\Services\\TokenService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACIAAAA4AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-28T23:53:11.589Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "ExamService.cs",
+              "DocumentMoniker": "C:\\Users\\krsti\\Documents\\react-app\\backend\\ReactAppBack\\Services\\ExamService.cs",
+              "RelativeDocumentMoniker": "ReactAppBack\\Services\\ExamService.cs",
+              "ToolTip": "C:\\Users\\krsti\\Documents\\react-app\\backend\\ReactAppBack\\Services\\ExamService.cs",
+              "RelativeToolTip": "ReactAppBack\\Services\\ExamService.cs",
+              "ViewState": "AgIAAA0AAAAAAAAAAAA5wCgAAAAzAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-28T23:26:47.471Z",
+              "EditorCaption": ""
+            }
+          ]
+        },
+        {
+          "DockedWidth": 203,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "UserController.cs",
+              "DocumentMoniker": "C:\\Users\\krsti\\Documents\\react-app\\backend\\ReactAppBack\\Controllers\\UserController.cs",
+              "RelativeDocumentMoniker": "ReactAppBack\\Controllers\\UserController.cs",
+              "ToolTip": "C:\\Users\\krsti\\Documents\\react-app\\backend\\ReactAppBack\\Controllers\\UserController.cs",
+              "RelativeToolTip": "ReactAppBack\\Controllers\\UserController.cs",
+              "ViewState": "AgIAAC4AAAAAAAAAAAAkwBEAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-28T23:36:46.797Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "ExamController.cs",
+              "DocumentMoniker": "C:\\Users\\krsti\\Documents\\react-app\\backend\\ReactAppBack\\Controllers\\ExamController.cs",
+              "RelativeDocumentMoniker": "ReactAppBack\\Controllers\\ExamController.cs",
+              "ToolTip": "C:\\Users\\krsti\\Documents\\react-app\\backend\\ReactAppBack\\Controllers\\ExamController.cs",
+              "RelativeToolTip": "ReactAppBack\\Controllers\\ExamController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-28T23:27:10.549Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "AuthController.cs",
+              "DocumentMoniker": "C:\\Users\\krsti\\Documents\\react-app\\backend\\ReactAppBack\\Controllers\\AuthController.cs",
+              "RelativeDocumentMoniker": "ReactAppBack\\Controllers\\AuthController.cs",
+              "ToolTip": "C:\\Users\\krsti\\Documents\\react-app\\backend\\ReactAppBack\\Controllers\\AuthController.cs",
+              "RelativeToolTip": "ReactAppBack\\Controllers\\AuthController.cs",
+              "ViewState": "AgIAADgAAAAAAAAAAAAYwEcAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-28T23:23:10.936Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
