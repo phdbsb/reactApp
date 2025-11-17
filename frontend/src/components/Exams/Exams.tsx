@@ -166,12 +166,12 @@ const Exams = () => {
   // console.log("PassedExams: ", passedExams);
 
   const mappedPassedExams = passedExams
-  ?.filter((pe) => pe.passed)
+    ?.filter((pe) => pe.passed)
     .map((pe) => {
       const fullExam = exams?.find((exam) => exam.id === pe.examId);
       return fullExam ? { ...fullExam, grade: pe.grade } : null;
     })
-    .filter((exam): exam is IGetExams & {grade: number } => exam !== null);
+    .filter((exam): exam is IGetExams & { grade: number } => exam !== null);
 
   const notPassedExams = exams?.filter(
     (exam) => !passedExams?.some((pe) => pe.examId === exam.id && pe.passed)
@@ -207,7 +207,7 @@ const Exams = () => {
               />
             ))}
           </div>
-          {isProfessor && otherExamsList?.length > 0 && (
+          {/* {isProfessor && otherExamsList?.length > 0 && (
             <div className={styles["other-exams-container"]}>
               <h2 className={styles["all-exams-title"]}>{t("exam.all_exams")}</h2>
               {otherExams?.map((exam, index) => (
@@ -222,8 +222,49 @@ const Exams = () => {
                 />
               ))}
             </div>
+          )} */}
+          {isProfessor && (
+            <div className={styles["other-exams-container"]}>
+              <h2 className={styles["all-exams-title"]}>
+                {t("exam.all_exams")}
+              </h2>
+              {otherExamsList.length > 0 ? (
+                otherExamsList.map((exam, index) => (
+                  <Exam
+                    key={`${exam.id}-${index}`}
+                    exam={{ id: exam.id, title: exam.title } as any}
+                    onEditClick={() => {}}
+                    onDeleteClick={() => {}}
+                    onReportClick={() => {}}
+                    timeLeft={""}
+                    canEdit={false}
+                  />
+                ))
+              ) : (
+                <p></p> // opcionalno, možeš ostaviti prazno
+              )}
+            </div>
           )}
-          <div className={styles["passed-exams-container"]}>
+          {/* Passed Exams - samo za studenta */}
+          {isStudent && (
+            <div className={styles["passed-exams-container"]}>
+              <h2 className={styles["passed-title"]}>
+                {t("exam.passed_exams")}
+              </h2>
+              {mappedPassedExams?.map((exam, index) => (
+                <Exam
+                  key={`${exam.id}-${index}`}
+                  exam={exam}
+                  onEditClick={onEditClick}
+                  onDeleteClick={onDeleteClick}
+                  onReportClick={onReportClick}
+                  timeLeft={timeLeftMap[exam.id] || ""}
+                  grade={exam.grade}
+                />
+              ))}
+            </div>
+          )}
+          {/* <div className={styles["passed-exams-container"]}>
             <h2 className={styles["passed-title"]}>{t("exam.passed_exams")}</h2>
             {isStudent &&
               mappedPassedExams?.map((exam, index) => (
@@ -237,7 +278,7 @@ const Exams = () => {
                   grade={exam.grade}
                 />
               ))}
-          </div>
+          </div> */}
         </div>
       </div>
       <div className={styles["form-container"]}>
